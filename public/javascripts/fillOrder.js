@@ -493,9 +493,14 @@ var step2Tmpl=new Template({
                 		var weeks=$('#weeks').find('.nums').text();
                 		var daylength=weeks*7;
                 		var monthDays=[];
-                		var now=new Date();
+                		var d = new Date();
                 		for(var i=0;i<daylength;i++){
-                			var date=now.setDate(i);
+                			var monthday=d.setDate(d.getDate()+i);
+							console.log(monthday.getDay());
+                		}	
+            			/**
+                		for(var i=0;i<daylength;i++){
+                			
                 			if(date.getDay()==0){
                 				date.getDay()==7;
                 			}
@@ -508,6 +513,7 @@ var step2Tmpl=new Template({
 			                    }
 			                })
                 		}
+                		**/
                 		console.log(monthDays);
 		            	main();
 						showPage('.page-1');
