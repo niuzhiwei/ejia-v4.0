@@ -1,0 +1,149 @@
+body {
+	font-size:1.4rem;
+	background:#ebebeb;
+	padding-bottom:5rem;
+}
+.notice {
+    background: #fef8d1;
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+    color: #ff6733;
+}
+.service-top {
+	background:#fff;
+}
+.top-left {
+	width:45%;
+	border-right:1px solid #ebebeb;
+	text-align:center;
+	position:relative;
+}
+.top-left img {
+	width:5rem;
+	margin:0 auto;
+	margin-bottom:5px;
+}
+.top-icon {
+	width: 6rem;
+    padding-left: 1.5rem;
+    padding-right: 0.5rem;
+}
+.top-right i {
+	color:#fc5756;
+	font-size:5rem;
+}
+.row-1 > div {
+	border-bottom:1px solid #ebebeb;
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
+}
+.row-2 > div {
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
+}
+.row-2 i {
+	color:#ff6733;
+}
+.top-title {
+    margin-bottom: 2px;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.top-des {
+	font-size:1.4rem;
+	color:#5d5d5d;
+}
+.hot-icon {
+	position: absolute;
+    top: 0;
+}
+.hot-icon img {
+	width:4rem;
+}
+.service-items {
+	margin-top:0.5rem;
+	background:#fff;
+	text-align:center;
+	padding-top:1rem;
+	padding-bottom:1.2rem;
+}
+.service-items i {
+	font-size:5rem;
+}
+.items-row > div {
+	padding-bottom:0.5rem;
+}
+.service-items .row > div {
+	width:5rem;
+}
+.news {
+	background:#fff;
+	padding:1rem;
+	border-top:1px solid #d8d8d8;
+}
+.news-icon {
+	padding-right:1rem;
+	width:8rem;
+}
+.news-icon img {
+}
+.news-item {
+	padding-left:1rem;
+	border-left: 1px solid #d8d8d8;
+	height:40px;
+	overflow:hidden;
+}
+.news-item li {
+	height:20px;
+	line-height:20px;
+}
+.activity {
+	background:#fff;
+	margin-top:0.5rem;
+	padding-left:0.5rem;
+	padding-right:0.5rem;
+}
+.activity img {
+	border:1px solid #d8d8d8;
+}
+.activity .row > div {
+	padding:1rem 0.5rem;
+}
+.comments {
+	background:#fff;
+	margin-top:0.5rem;
+}
+.comments-title {
+	padding:1rem 1.5rem;
+	font-size:1.6rem;
+	color:#ff6733;
+	font-weight:bold;
+	border-bottom:1px solid #d8d8d8;
+}
+.more {
+	float:right;
+	color:#5d5d5d;
+	font-weight: normal;
+}
+.list-item {
+	padding: 0.5rem 1.5rem;
+    line-height: 2rem;
+    border-bottom:1px solid #ebebeb;
+}
+.list-gray {
+	color:#a8a8a8;
+	font-size:1.2rem;
+}
+.fr {
+	float:right;
+}
+.comment-reply {
+	color:#ad6045;
+}
+.swiper-pagination{
+	text-align: right;
+    bottom: 0 !important;
+}
+.swiper-pagination-bullet-active{
+	background:#ff6733;
+}

@@ -1,0 +1,52 @@
+<%if(data.area){%>
+	<%if(!!type){%>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe654;</i>
+			</div>
+			<div class='col-2'>
+				<span><%=servicename%></span>
+			</div>
+			<div class='arrow'>
+			</div>
+		</div>
+	<%}%>
+	<div class='row address-for' data-phone='<%=data.phone%>' data-area='<%=data.area%>' data-door='<%=data.door%>' data-lng='<%=data.lng%>' data-lat='<%=data.lat%>'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe656;</i>
+		</div>
+		<div class='col-2'>
+			<%if(data.phone){%>
+				<p><%if(data.linkman){%><span class='linkman'><%=data.linkman%></span><%}%><%=data.phone%></p>
+			<%}%>
+			<label data-value='<%=data.area%>'><%=data.area%><%=data.door%></label>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}else{%>
+	<%if(!!type){%>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe654;</i>
+			</div>
+			<div class='col-2'>
+				<span><%=servicename%></span>
+			</div>
+			<div class='arrow'>
+			</div>
+		</div>
+	<%}%>
+	<div class='row address-for'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe656;</i>
+		</div>
+		<div class='col-2'>
+			<label data-value=''>请选择服务地址</label>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}%>

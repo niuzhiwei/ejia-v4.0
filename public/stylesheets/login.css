@@ -1,0 +1,52 @@
+body {
+	font-size:1.4rem;
+	padding-bottom:6rem;
+	background:#ebebeb;
+}
+input {
+	width:100%;
+	border:none;
+	background:none;
+	height:5rem;
+	font-size:1.8rem;
+	color:#b4b4b4;
+}
+.title {
+	height:5rem;
+	line-height:5rem;
+	font-size:1.8rem;
+	border-bottom:1px solid #b4b4b4;
+	padding-left: 1.5rem;
+}
+.table {
+	background:#fff;
+}
+.row > div {
+	height:5rem;
+	border-bottom:1px solid #b4b4b4;
+}
+.input-box {
+	padding-left:1.5rem;
+}
+.scode-box,.send-code{
+	padding-right:1.5rem;
+}
+.send-code button{
+	height:3.5rem;
+	font-size:1.4rem;
+}
+.btn-chip {
+	padding:1rem;
+}
+.btn-chip button {
+	height:4rem;
+}
+.tips {
+	text-align:center;
+}
+.tips span {
+	color:#1a57e0;
+}
+.btn-disable {
+	background:#b4b4b4;
+}

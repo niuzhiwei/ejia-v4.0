@@ -1,0 +1,50 @@
+<div class='page-content'>
+	<div class='table'>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe654;</i>
+			</div>
+			<div class='col-2'>
+				<span>请选择服务周期</span>
+			</div>
+		</div>
+	</div>
+	<div class='flex-box fill-week'>
+		<div class="<%if(new Date().getDay()==0){%>fill-current<%}%>" data-weeknum='7'>周日</div>
+		<div class="<%if(new Date().getDay()==1){%>fill-current<%}%>" data-weeknum='1'>周一</div>
+		<div class="<%if(new Date().getDay()==2){%>fill-current<%}%>" data-weeknum='2'>周二</div>
+		<div class="<%if(new Date().getDay()==3){%>fill-current<%}%>" data-weeknum='3'>周三</div>
+		<div class="<%if(new Date().getDay()==4){%>fill-current<%}%>" data-weeknum='4'>周四</div>
+		<div class="<%if(new Date().getDay()==5){%>fill-current<%}%>" data-weeknum='5'>周五</div>
+		<div class="<%if(new Date().getDay()==6){%>fill-current<%}%>" data-weeknum='6'>周六</div>
+	</div>
+	<div class='table monthly-tb'>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe657;</i>
+			</div>
+			<div class='col-2'>
+				<input id="appointTime" type="text" placeholder="请选择服务时间"/>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe657;</i>
+			</div>
+			<div class='col-2'>
+				<span class='num-title'>服务周数</span>
+				<div class='flex-box set-num' id='weeks'>
+					<div class='num-minus disabled'>-</div>
+					<div><span class='nums'>2</span><span class='unit'>周</span></div>
+					<div class='num-plus'>+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='week-tips'>
+		总计：<span class='formula'><span class='week-time'>1</span>次/周 × <span class='week-num'>2</span>周 = </span><span class='week-total'>2</span>次
+	</div>
+</div>
+<div class='page-nav'>
+	<button type="button" class="monthly-time-btn">确定</button>
+</div>

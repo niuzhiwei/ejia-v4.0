@@ -1,0 +1,36 @@
+<div class='page-content'>
+	<div class='table'>
+		<%for(var i=0;i<data.length;i++){%>
+			<div class="row aunt-item">
+				<div class="aunt-icon">
+					<%if(!!data[i].icon){%>
+						<img src="http://shangjia.exiangjia.com/<%=data[i].icon%>"/>
+					<%}else{%>
+						<img src="/images/wx/aunt_logo.png"/>
+					<%}%>
+				</div>
+				<div class="aunt-info-base">
+					<span><%=data[i].realname%></span>
+					<div class="aunt-level">
+						<%if(data[i].startlevel){%>
+							<%for(var j=0;j<data[i].startlevel;j++){%><!--不能用i循环了..-->
+								<img src='/images/wx/order/one_star.png' class="aunt-star"/>
+							<%}%>
+						<%}else{%>
+							<img src='/images/wx/order/one_star.png' class="aunt-star"/>
+						<%}%>
+					</div>
+				</div>
+				<div class="aunt-info-other">
+					<span>年龄：<%=data[i].age%>岁</span>
+					<p>接单量：<%=data[i].ordercount%>单</p>
+				</div>
+				<div class="iconfont icon-check if-2x" data-userid="<%=data[i].userid%>" data-name="<%=data[i].realname%>" data-icon="<%=data[i].icon%>">
+				</div>
+			</div>
+		<%}%>
+	</div>
+</div>
+<div class='page-nav'>
+	<button type="button" class="myAunt-btn">确定</button>
+</div>

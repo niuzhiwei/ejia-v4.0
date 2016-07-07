@@ -1,0 +1,53 @@
+<div class='address-info'>
+	<div class='table'>
+		<div class='row address-area' data-lng='<%=baiduMapLng%>' data-lat='<%=baiduMapLat%>'>
+			<div class='icon'><i class="iconfont">&#xe656;</i></div>
+			<div>
+				<label><%=addressArea%></label>
+			</div>
+			<div class='arrow'>
+				<i class="iconfont">&#xe658;</i>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='icon'><i class="iconfont">&#xe65b;</i></div>
+			<div>
+				<input type="text" class='address-door' placeholder="请填写您的门牌号" value='<%=addressHouse%>'>
+			</div>
+			<div></div>
+		</div>
+		<div class='row row-3'>
+			<div class='icon'><i class="iconfont">&#xe662;</i></div>
+			<div>
+				<input type="text" class='address-uname' placeholder="姓氏" value='<%=linkman.substring(0,linkman.length-2)%>'>
+				<%if(linkman.substring(linkman.length-2,linkman.length)==='先生'){%>
+					<label class='boy'><i class="iconfont icon-checked"></i><span>先生</span></label>
+					<label class='girl'><i class="iconfont icon-check"></i><span>女士</span></label>
+				<%}else{%>
+					<label class='boy'><i class="iconfont icon-check"></i><span>先生</span></label>
+					<label class='girl'><i class="iconfont icon-checked"></i><span>女士</span></label>
+				<%}%>
+			</div>
+			<div></div>
+		</div>
+		<div class='row'>
+			<div class='icon'><i class="iconfont">&#xe65d;</i></div>
+			<div>
+				<input type="text" class='mobile' value='<%=mobile%>' placeholder='请填写您的手机号'>
+			</div>
+			<div></div>
+		</div>
+	</div>
+</div>
+<div class='set-default'>
+	<label>
+		<%if(isDefault===1){%>
+			<i class="iconfont icon-checked"></i>设为默认
+		<%}else{%>
+			<i class="iconfont icon-check"></i>设为默认
+		<%}%>
+	</label>
+</div>
+<div class='fixed-btn'>
+	<button class='save-address'>保存</button>
+</div>

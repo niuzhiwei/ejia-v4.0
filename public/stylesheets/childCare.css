@@ -1,0 +1,167 @@
+body {
+	font-size:1.2rem;
+	padding-bottom:6rem;
+}
+.title {
+	font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1rem 2rem 0.5rem;
+    border-bottom:1px solid #ff6733;
+}
+.title img {
+	width:1rem;
+	float:right;
+	-webkit-transform: rotate(90deg);
+}
+.intro-table {
+	padding:1.5rem;
+}
+.intro-table img {
+	width:10rem;
+}
+.intro-table p {
+	margin-top:0.7rem;
+ 	text-indent:2em;
+}
+.content {
+	line-height:1.8rem;
+}
+.content-1 {
+	padding:1rem 0;
+}
+.content-1 > div {
+	padding:0 1.5rem;
+}
+.content-1 img {
+	width:11.5rem;
+	padding-right:1rem;
+}
+.content-1 .row > div {
+	padding-top:1rem;
+	padding-bottom:1rem;
+}
+.tb-odd {
+	background:#f6f6f6;
+	text-align:right;
+}
+.tb-odd img {
+	padding-right: 0;
+	padding-left: 1rem;
+}
+.p-title {
+	font-size:1.8rem;
+	font-weight:bold;
+}
+.title-1 {
+	color:#45a5db;
+}
+.title-2 {
+	color:#ffab33;
+}
+.title-3 {
+	color:#ff6733;
+}
+.title-4 {
+	color:#60aa11;
+}
+.title-5 {
+	color:#ba7511;
+}
+.content-2 {
+	text-align:center;
+	padding:1.5rem 2rem 2rem;
+}
+.content-2 img {
+	padding-bottom:0.5rem;
+	width: 10rem;
+    margin: 0 auto;
+}
+.content-2 .row > div {
+	padding-left:1rem;
+	padding-right:1rem;
+}
+.content-3 {
+	padding:2.5rem;
+}
+.content-4 {
+	text-align:center;
+	padding:1.5rem;
+}
+.s-logo{
+	width:5rem;
+}
+.s-arrow img{
+	width:1rem;
+	margin:0 auto;
+}
+.s-title > td {
+	padding-top:1rem;
+	padding-bottom:1.5rem;
+}
+.list-style {
+	width:1rem;
+	height:1rem;
+	border-radius:50%;
+	background:#ff6733;
+}
+.scope {
+}
+.scope-table{
+	padding:1rem 2rem;
+}
+.scope-style {
+	padding-right: 1rem;
+}
+.service-price {
+	padding:1.5rem;
+	background:#f6f6f6;
+}
+.scope p {
+	margin-top:0.5rem;
+}
+.flex-box .table{
+	width:50%;
+}
+.price-title {
+	padding:1rem 1rem 2rem;
+}
+.price-table {
+	border:1px solid #ff6733;
+	border-radius:10px;
+	margin:0 0.5rem;
+	padding:1.5rem 0;
+}
+.price-table img {
+	height:2.5rem;
+	width:auto;
+}
+.price-table > div {
+	display: table-cell;
+    vertical-align: middle;
+}
+.price-icon {
+	padding-left:1rem;
+}
+.price-info {
+	padding-left:0.5rem;
+}
+.child-toy {
+	text-align:center;
+	padding: 2rem 0!important;
+	color:#525252;
+}
+.child-toy img {
+	width:100%;
+}
+.bg-gray{
+	background:#f6f6f6;
+	padding:1.5rem;
+	line-height:1.8rem;
+}
+.bg-gray img {
+	padding-right:1rem;
+	width:11.5rem;
+}
+.service-price p{
+	margin-top: 0.5rem;
+}

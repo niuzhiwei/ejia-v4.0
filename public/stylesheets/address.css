@@ -1,0 +1,37 @@
+body{
+	font-size:1.4rem;
+	padding-bottom:6rem;
+	background:#ebebeb;
+}
+.address-chip {
+	background:#fff;
+	margin-bottom:0.5rem;
+}
+.address-info {
+	padding-top:1rem;
+	padding-left:1rem;
+	padding-right:1rem;
+}
+.address-info p {
+	margin-bottom:1rem;
+}
+.address-bar {
+	padding:1rem;
+	border-top:1px solid #ebebeb;
+	font-size:1.5rem;
+}
+.address-bar i {
+	margin-right:5px;
+	font-size:1.5rem;
+}
+.mod {
+	margin-right:0.5rem;
+}
+.del i {
+	margin-right:1px;
+}
+.default {
+	color:#ff6733;
+}
+.icon-checked:before { content: "\e661"; }
+.icon-check:before { content: "\e660";}

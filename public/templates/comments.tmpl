@@ -1,0 +1,16 @@
+<%for(var i=0;i<list.length;i++){%>
+	<div class='list-item'>
+		<p>“<%=list[i].contents%>”</p>
+		<div class='img-box'></div>
+		<p class='list-gray'>
+			<span class='list-date'><%=list[i].creationDate%></span>
+			<span class='fr'>
+				<span class='list-type'><%=list[i].serviceName%></span>
+				<span class='list-phone'><%=list[i].mobile%></span>
+			</span>
+		</p>
+		<%if(list[i].replycontent){%>
+			<p class='comment-reply'>解释：<%=list[i].replycontent%></p>
+		<%}%>
+	</div>
+<%}%>

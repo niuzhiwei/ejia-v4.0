@@ -1,0 +1,53 @@
+<%if(data){%>
+	<div class='row time'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe657;</i>
+		</div>
+		<div class='col-2'>
+			<%if(serviceclass=='0001000300030001'){%>
+				<input id="appointTime" type="text" placeholder="请选择预产期" value='<%=data%>'/>
+			<%}else{%>
+				<input id="appointTime" type="text" placeholder="请选择服务时间" value='<%=data%>'/>
+			<%}%>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+	<div class='row to-remark'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe65a;</i>
+		</div>
+		<div class='col-2'>
+			<label>特殊要求请再次填写（选填）</label>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+	<div class='row remark-box'>
+		<div class='col-1'>
+		</div>
+		<div class='col-2'>
+			<textarea class='remark'></textarea>
+		</div>
+		<div class='arrow'>
+		</div>
+	</div>
+<%}else{%>
+	<div class='row time'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe657;</i>
+		</div>
+		<div class='col-2'>
+			<%if(serviceclass=='0001000300030001'){%>
+				<input id="appointTime" type="text" placeholder="请选择预产期" value='<%=data%>'/>
+			<%}else{%>
+				<input id="appointTime" type="text" placeholder="请选择服务时间" value='<%=data%>'/>
+			<%}%>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}%>

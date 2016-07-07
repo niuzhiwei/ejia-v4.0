@@ -1,0 +1,34 @@
+<div class='scroll-view'>
+	<ul>
+		<%for(var i=0;i<list.length;i++){%>
+		<div class='address-chip'>
+			<div class='address-info' data-linkman='<%=list[i].linkman%>' data-phone='<%=list[i].mobile%>' data-area='<%=list[i].addressArea%>' data-door='<%=list[i].addressHouse%>' data-lng='<%=list[i].baiduMapLng%>' data-lat='<%=list[i].baiduMapLat%>'>
+				<p>
+					<span class='uanme'><%=list[i].linkman%></span>
+					<span class='uphone'><%=list[i].mobile%></span>
+				</p>
+				<p>
+					<span class='address-area'><%=list[i].addressArea%></span>
+					<span><%=list[i].addressHouse%></span>
+				</p>
+			</div>
+			<div class='address-bar'>
+				<label class='default' data-id='<%=list[i].id%>'>
+					<%if(list[i].isDefault==1){%>
+						<span><i class="iconfont icon-checked"></i>默认地址</span>
+					<%}else{%>
+						<span style="color:#000;"><i class="iconfont icon-check"></i>设为默认</span>
+					<%}%>
+				</label>
+				<span class='fl-right'>
+					<label class='mod' data-id='<%=list[i].id%>'><i class="iconfont">&#xe655;</i>编辑</label>
+					<label class='del' data-id='<%=list[i].id%>'><i class="iconfont">&#xe65c;</i>删除</label>
+				</span>
+			</div>
+		</div>
+		<%}%>
+	</ul>
+</div>
+<div class='fixed-btn'>
+	<button class='new-address'>添加新地址</button>
+</div>

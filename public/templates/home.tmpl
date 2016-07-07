@@ -1,0 +1,129 @@
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<%for(var i=0;i<banner.length;i++){%>
+			<div class='swiper-slide' data-goto='<%=banner[i].visiturl%>'>
+		  		<img src='<%=banner[i].imgurl%>'/>	
+		  	</div>
+		<%}%>
+  	</div>
+  	<div class="swiper-pagination"></div>
+</div>
+<%if(notice){%>
+	<div class='notice'>公告：<%=notice.title%></div>
+<%}%>
+<div class='service-top'>
+	<div class='table'>
+		<div class='row'>
+			<div class='top-left router' data-router='nurse.html'>
+				<img src='../images/home/hot-logo.png'/>
+				<p class='top-title'>保姆服务</p>
+				<p class='top-des'>居家全能助手</p>
+				<div class='hot-icon'>
+					<img src='../images/home/hot.png'/>
+				</div>
+			</div>
+			<div class='top-right'>
+				<div class='table'>
+					<div class='row row-1 router' data-router='matron.html'>
+						<div class='top-icon'><i class="iconfont">&#xe670;</i></div>
+						<div><p class='top-title'>月嫂服务</p><p class='top-des'>温馨呵护母婴</p></div>
+					</div>
+					<div class='row row-2 router' data-router='childCare.html'>
+						<div class='top-icon'><i class="iconfont">&#xe66f;</i></div>
+						<div><p class='top-title'>育婴师</p><p class='top-des'>宝宝启蒙指导</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class='service-items'>
+	<div class='table'>
+		<div class='row items-row'>
+			<div class='router' data-router='daily.html'>
+				<i class="iconfont" style='color:#edbf4b;'>&#xe66b;</i>
+				<p>日常保洁</p>
+			</div>
+			<div class='router' data-router='window.html'>
+				<i class="iconfont" style='color:#23cfcc;'>&#xe668;</i>
+				<p>玻璃清洗</p>
+			</div>
+			<div class='router' data-router='wasteland.html'>
+				<i class="iconfont" style='color:#f2a339;'>&#xe66d;</i>
+				<p>新居开荒</p>
+			</div>
+			<div class='router' data-router='professional.html'>
+				<i class="iconfont" style='color:#8ac333;'>&#xe66a;</i>
+				<p>企业保洁</p>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='router' data-router='fotile.html'>
+				<i class="iconfont" style='color:#f78b48;'>&#xe66e;</i>
+				<p>油烟机清洗</p>
+			</div>
+			<div class='router' data-router='airConditioner.html'>
+				<i class="iconfont" style='color:#35b944;'>&#xe669;</i>
+				<p>空调清洗</p>
+			</div>
+			<div class='router' data-router='icebox.html'>
+				<i class="iconfont" style='color:#28a8e0;'>&#xe667;</i>
+				<p>冰箱清洗</p>
+			</div>
+			<div class='router' data-router='washer.html'>
+				<i class="iconfont" style='color:#4b8be7;'>&#xe66c;</i>
+				<p>洗衣机清洗</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class='news'>
+	<div class='table'>
+		<div class='row'>
+			<div class='news-icon'>
+				<img src='../images/home/news.png'/>
+			</div>
+			<div class='news-items'>
+				<div class='news-item' id='tab-2'>
+					<ul>
+					<%for(var i=0;i<news.length;i++){%>
+						<li class='nowrap' data-url='<%=news[i].newurl%>' data-contentid='<%=news[i].contentid%>'><%=news[i].title%></li>
+					<%}%>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class='activity'>
+	<div class='table'>
+		<div class='row'>
+			<%for(var i=0;i<activityBanner.length;i++){%>
+				<div class='go-activity' data-goto='<%=activityBanner[i].visiturl%>'>
+			  		<img src='<%=activityBanner[i].imgurl%>'/>	
+			  	</div>
+			<%}%>
+		</div>
+	</div>
+</div>
+<div class='comments'>
+	<div class='comments-title'> | 用户评论<span class='more'>查看更多</span></div>
+	<div class='comments-list'>
+		<%for(var i=0;i<comment.length;i++){%>
+			<div class='list-item'>
+				<p>“<%=comment[i].contents%>”</p>
+				<div class='img-box'></div>
+				<p class='list-gray'>
+					<span class='list-date'><%=comment[i].creationDate%></span>
+					<span class='fr'>
+						<span class='list-type'><%=comment[i].serviceName%></span>
+						<span class='list-phone'><%=comment[i].mobile%></span>
+					</span>
+				</p>
+				<%if(comment[i].replycontent){%>
+					<p class='comment-reply'>解释：<%=comment[i].replycontent%></p>
+				<%}%>
+			</div>
+		<%}%>
+	</div>
+</div>

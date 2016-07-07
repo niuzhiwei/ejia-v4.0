@@ -1,0 +1,23 @@
+body {
+	font-size:1.2rem;
+	padding-bottom:6rem;
+}
+.title {
+	font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1rem 2rem 0.5rem;
+}
+.content {
+	text-align:center;
+	border-top:1px solid #ff6733;
+	padding:1.5rem 1.5rem 0;
+}
+.content img {
+	padding-bottom:0.5rem;
+}
+.content .row > div {
+	width:5rem;
+	padding-left:1rem;
+	padding-right:1rem;
+	padding-bottom: 1rem;
+}

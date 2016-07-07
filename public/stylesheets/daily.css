@@ -1,0 +1,123 @@
+body {
+	font-size:1.2rem;
+	padding-bottom:6rem;
+}
+.logo-chip {
+	background:#ff6733;
+	color:#fff;
+	font-size:1.4rem;
+}
+.row>div {
+	padding-top: 0.5rem;
+	padding-bottom:0.5rem;
+}
+.title {
+	font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1rem 2rem 0.5rem;
+    border-bottom:1px solid #ff6733;
+}
+div.icon {
+	position:relative;
+}
+div.icon img {
+	position: absolute;
+    width: 5rem;
+    bottom: 0.5rem;
+    left: 2rem;
+}
+.icon-title {
+	padding-left:8rem;
+	font-size:1.6rem;
+}
+.icon-des {
+	text-align: right;
+    padding-right: 2rem;
+}
+.icon-des p:first-child {
+	margin-bottom:3px;
+}
+.content {
+	padding: 1rem 2rem;
+    line-height: 2rem;
+}
+.price-des {
+	color:#ff6733;
+}
+table {
+	text-align:center;
+}
+td {
+	border:1px solid #9f9f9f;
+	height:3rem;
+}
+thead {
+	background:#ebebeb;
+}
+.chip-icon {
+	padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+	padding-left:1.5rem;
+	padding-right: 1rem;
+	width:13rem;
+	text-align:center;
+}
+.chip-icon p {
+	margin-top: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.chip-des {
+	padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-right:1.5rem;
+    line-height:18px;
+}
+.chip-des span {
+	font-weight:bold;
+}
+.table-2 {
+	background:#f6f6f6;
+}
+.table-2 .chip-des{
+	padding-left:1.5rem;
+	padding-right: 0;
+}
+.table-2 .chip-icon{
+	padding-right:1.5rem;
+	padding-left:1rem;
+}
+.tips-box {
+	margin-top:1rem;
+	margin-bottom:1rem;
+	text-align:center;
+}
+.tips {
+	display:inline-block;
+	padding:0.5rem 1.5rem;
+	border:1px solid #000;
+	font-size:1.4rem;
+}
+.tips-left {
+	text-align:left;
+}
+.service-des {
+	text-align:center;
+	font-size:1.4rem;
+}
+.service-des .row > div {
+	padding-left: 2rem;
+	padding-right: 2rem;
+	width:50%;
+}
+.list-style {
+	display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #ff6733;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.content-tips {
+	font-size:1.4rem;
+}

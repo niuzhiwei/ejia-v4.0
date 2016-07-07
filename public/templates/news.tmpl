@@ -1,0 +1,23 @@
+<div class='table'>
+	<%for(var i=0;i<list.length;i++){%>
+		<div class='row news-item' data-contentid='<%=list[i].contentid%>'>
+			<div class='news-pic'>
+				<div class='flex-box'>
+					<%if(list[i].listimg){%>
+						<img src='<%=list[i].listimg%>'/>
+					<%}else{%>
+						<img src='../images/logo.png'/>
+					<%}%>
+				</div>
+			</div>
+			<div class='news-info'>
+				<p class='news-title'><%=list[i].title%></p>
+				<p class='news-source'><%=list[i].source%>
+					<span class='news-views'>
+						<i class="iconfont">&#xe671;</i><%=list[i].readnum%>
+					</span>
+				</p>
+			</div>
+		</div>
+	<%}%>
+</div>

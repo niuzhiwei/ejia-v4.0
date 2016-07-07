@@ -1,0 +1,35 @@
+body {
+	font-size:1.4rem;
+	padding-bottom:6rem;
+}
+.title-chip {
+	padding:1.5rem;
+	border-bottom:1px solid #b4b4b4;
+}
+.new-content {
+	padding:1.5rem;
+}
+.new-content img {
+	display:block;
+	width:100% !important;
+}
+.new-title {
+	font-size:1.8rem;
+	font-weight:bold;
+	margin-bottom:10px;
+	line-height:24px;
+}
+.new-other {
+	color:#a8a8a8;
+}
+.new-source {
+	color:#1a57e0;
+	margin-left:5px;
+	margin-right:5px;
+}
+.news-views i {
+	font-size: 1.2rem;
+    transform: scale(1.5,1.5);
+    display: inline-block;
+    margin-right: 0.5rem;
+}

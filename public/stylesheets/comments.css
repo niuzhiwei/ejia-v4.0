@@ -1,0 +1,42 @@
+body {
+	font-size:1.4rem;
+	padding-bottom:6rem;
+}
+.container{
+	padding-top: 1rem;
+	padding-bottom:1rem;
+}
+.comments {
+	background:#fff;
+	margin-top:1rem;
+}
+.comments-title {
+	padding:1rem 1.5rem;
+	font-size:1.6rem;
+	color:#ff6733;
+	font-weight:bold;
+	border-bottom:1px solid #d8d8d8;
+}
+.more {
+	float:right;
+	color:#5d5d5d;
+}
+.list-item {
+	padding: 1rem 1.5rem;
+    line-height: 2rem;
+    border-bottom:1px solid #ebebeb;
+}
+.list-gray {
+	color:#a8a8a8;
+	font-size:1.2rem;
+}
+.fr {
+	float:right;
+}
+.comment-reply {
+	color:#ad6045;
+}
+.list {
+	top:0;
+	bottom:7rem !important;
+}

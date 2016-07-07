@@ -1,0 +1,31 @@
+<div class='title'>输入手机号码登录</div>
+<div class='table'>
+	<div class='row'>
+		<div class='input-box'>
+			<input type="text" id="server-code" placeholder="请输入图形验证码">
+		</div>
+		<div class='scode-box'>
+			<img src='<%=data%>'/>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='input-box'>
+			<input type="text" id="login-mobile" placeholder="请输入手机号码">
+		</div>
+		<div class='send-code'>
+			<button id='get-code'>获取验证码</button>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='input-box'>
+			<input type="text" id="login-code" placeholder="请输入验证码">
+		</div>
+		<div></div>
+	</div>
+</div>
+<div class='btn-chip'>
+	<button id='login-btn'>确定</button>
+</div>
+<div class='tips'>
+	点击“确定”，即表示同意<span>《用户协议》</span>
+</div>

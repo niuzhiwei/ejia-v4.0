@@ -1,0 +1,27 @@
+<div class='scroll-view'>
+	<ul>
+	<%for(var i=0;i<data.length;i++){%>
+		<div class='chip <%=data[i].radioorcheck===1?"multi":"single"%>' data-notnull='<%=data[i].notnull%>'>
+			<div class='title'><%=data[i].title%></div>
+			<%for(var j=0;j<data[i].data.length;j++){%>
+				<%if(data[i].data[j].remark==='1'){%>
+					<div class='require-item selected' data-diccode='<%=data[i].data[j].diccode%>'><%=data[i].data[j].dicname%></div>
+				<%}else{%>
+					<div class='require-item' data-diccode='<%=data[i].data[j].diccode%>'><%=data[i].data[j].dicname%></div>
+				<%}%>
+			<%}%>
+			<!--
+			<div class='flex-box'>
+				<div><span>住家保姆</span></div>
+				<div><span class='selected'>不住家保姆</span></div>
+				<div></div>
+			</div>
+			-->
+			<div style="clear: both;"></div>
+		</div>
+	<%}%>
+	</ul>
+</div>
+<div class='fixed-btn'>
+	<button class='require-conform'>确定</button>
+</div>

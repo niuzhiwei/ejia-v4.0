@@ -1,0 +1,66 @@
+<%if(appointTime.data){%>
+	<div class='row time'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe657;</i>
+		</div>
+		<div class='col-2'>
+			<%if(appointTime.type=='monthly'){%>
+				<label data-value='<%=appointTime.data%>' class='monthly-time'><%=appointTime.data%></label>
+			<%}else{%>
+				<input id="appointTime" type="text" placeholder="请选择服务时间" value='<%=appointTime.data%>'/>
+			<%}%>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+	<div class='row to-remark'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe65a;</i>
+		</div>
+		<div class='col-2'>
+			<input type="text" class="order-remark" placeholder="请输入留言内容">
+			<%for(var i=0;i<requireItems.length;i++){%>
+				<span class='require-item'><%=requireItems[i]%></span>
+			<%}%>
+		</div>
+		<div class='arrow'>
+		</div>
+	</div>
+	<div class='row hot-aunt'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe65e;</i>
+		</div>
+		<%if(myAunt.length>0){%>
+			<div class='col-2'>
+				<%for(var i=0;i<myAunt.length;i++){%>
+					<img src='<%=myAunt[i].icon%>'/>
+					<span><%=myAunt[i].name%></span>
+				<%}%>
+			</div>
+		<%}else{%>
+			<div class='col-2'>
+				<label>最近服务人员/热门人选</label>
+			</div>
+		<%}%>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}else{%>
+	<div class='row time'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe657;</i>
+		</div>
+		<div class='col-2'>
+			<%if(appointTime.type=='monthly'){%>
+				<label data-value='' class='monthly-time'>请选择服务时间</label>
+			<%}else{%>
+				<input id="appointTime" type="text" placeholder="请选择服务时间"/>
+			<%}%>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}%>

@@ -1,0 +1,42 @@
+<%if(data.length>0){%>
+	<div class='row ask-for'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe654;</i>
+		</div>
+		<div class='col-2'>
+			<%if(serviceclass=='0001000300030003'){%>
+				<label data-value='1'>保姆要求</label>
+			<%}else if(serviceclass=='0001000300030002'){%>
+				<label data-value='1'>育婴师要求</label>
+			<%}else if(serviceclass=='0001000300030001'){%>
+				<label data-value='1'>月嫂要求</label>
+			<%}%>
+			<div class='demand-box'>
+				<%for(var i=0;i<data.length;i++){%>
+					<div class='demand-item' data-diccode='<%=data[i].diccode%>'><%=data[i].title%></div>
+				<%}%>
+			</div>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}else{%>
+	<div class='row ask-for'>
+		<div class='col-1'>
+			<i class="iconfont">&#xe654;</i>
+		</div>
+		<div class='col-2'>
+			<%if(serviceclass=='0001000300030003'){%>
+				<label data-value=''>请选择保姆要求</label>
+			<%}else if(serviceclass=='0001000300030002'){%>
+				<label data-value=''>请选择育婴师要求</label>
+			<%}else if(serviceclass=='0001000300030001'){%>
+				<label data-value=''>请选择月嫂要求</label>
+			<%}%>
+		</div>
+		<div class='arrow'>
+			<i class="iconfont">&#xe658;</i>
+		</div>
+	</div>
+<%}%>

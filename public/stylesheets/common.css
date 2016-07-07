@@ -1,0 +1,289 @@
+@font-face {font-family: 'iconfont';
+    src: url('./iconfont/iconfont.ttf') format('truetype'), 
+    url('./iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:1.4rem;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.if-1x{
+	font-size:1rem;
+}
+.if-2x{
+	font-size: 2rem;
+}
+.if-3x{
+	font-size: 3rem;
+}
+.if-5x{
+	font-size:5rem;
+}
+.if-6x{
+	font-size:6rem;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+html {
+	font-size:62.5%;
+}
+body {
+	overflow-x:hidden;
+}
+.page {
+	position:absolute;
+	width:100%;
+	background:#ebebeb;
+	min-height: 100%;
+}
+.page-2,.page-3 {
+	z-index:-1;
+}
+img {
+	display:block;
+	width:100%;
+	vertical-align:middle;
+}
+table,.table {
+	width:100%;
+	display:table;
+	border-collapse:collapse;
+}
+input {
+	font-size:1.4rem;
+}
+.row {
+	display:table-row;
+}
+.row > div,.td{
+	display:table-cell;
+	vertical-align:middle;
+}
+.flex-box{
+	display: -webkit-box;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;/*垂直居中*/
+	text-align:center;
+}
+.flex-box > div {
+	-webkit-box-flex: 1;
+}
+.fixed-btn{
+	padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+}
+.fixed-btn button, .fixed-btn a,button{
+	width: 100%;
+    height: 5rem;
+    background: #f8ae00;
+    border: none;
+    font-size: 1.6rem;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+a.btn{
+	display:block;
+	text-decoration:none;
+	text-align:center;
+	line-height:5rem;
+}
+.fl-left {
+	float:left;
+}
+.fl-right {
+	float:right;
+}
+.toasts-chip {
+	padding: 1rem;
+    width: 20rem;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 1rem;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 1.6rem;
+    top: 40%;
+    position: fixed;
+    left: 50%;
+    margin-left: -10rem;
+    z-index: 100;
+    opacity: 0;
+}
+.alert-chip,.confirm-chip{
+	position: fixed;
+	width: 100%;
+	top:0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	padding:0 2.5rem;
+	text-align: center;
+	opacity: 0;
+	z-index: -1;
+}
+.alert-box,.confirm-box{
+	background: rgba(255,255,255,0.95);
+	color:#000;
+	border-radius: 0.5rem;
+	font-size: 1.4rem;
+}
+.alert-content,.confirm-content {
+	padding: 2rem 1rem;
+}
+.alert-footer,.confirm-footer {
+	padding:0rem 1rem;
+	height: 5rem;
+	line-height: 5rem;
+	border-top:1px solid rgb(200,200,200);
+	color: rgb(20,135,255);
+	font-size: 1.6rem;
+	font-weight: bold;
+	display:table;
+	width:100%;
+}
+.confirm-footer > div {
+	width: 50%;
+}
+.confirm-false {
+	border-right: 1px solid rgb(200,200,200);
+}
+.page-overlay {
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 100;
+}
+.page-tips{
+	width: 20rem;
+    height: 10rem;
+    position: absolute;
+    margin-top: -5rem;
+    margin-left: -10rem;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 1.6rem;
+}
+.scroll-view {
+	position: absolute;
+    height: 100%;
+    width:100%;
+    overflow-y: auto;
+     /* 增加该属性，可以增加弹性 */
+    -webkit-overflow-scrolling: touch;
+}
+.scroll-view > ul {
+	padding-bottom:7rem;
+}
+footer {
+	text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background:#fafafa;
+    border-top:1px solid #d8d8d8;
+    font-size:1.2rem;
+}
+footer .td {
+	height:5rem;
+}
+footer i {
+	font-size:2.5rem !important;
+}
+a {
+	text-decoration: none;
+}
+.menu-item {
+	color:#5d5d5d;
+}
+.menu-current {
+	color:#ff6733;
+}
+.nowrap {
+    width: 20rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*animate*/
+.animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+.animated.delay {
+	animation-delay:0.5s;
+	-webkit-animation-delay:0.5s; /* Safari 和 Chrome */
+}
+.animated.infinite {
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+}
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+.fadeIn {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
+}
+@-webkit-keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+
+	100% {
+		opacity: 0
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+
+	100% {
+		opacity: 0
+	}
+}
+
+.fadeOut {
+	-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
+}

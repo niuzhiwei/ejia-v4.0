@@ -1,0 +1,55 @@
+body{
+	font-size:1.4rem;
+	background:#ebebeb;
+}
+.address-info {
+	background:#fff;
+	padding-left:1.5rem;
+}
+.set-default {
+	background:#fff;
+}
+.row > div {
+	border-bottom:1px solid #ebebeb;
+	padding-top:1.5rem;
+	padding-bottom: 1.5rem;
+}
+.arrow {
+	text-align: right;
+    width: 2rem;
+	padding-right:1.5rem;
+}
+.icon {
+	width:2rem;
+}
+.icon i {
+	font-size:2rem;
+}
+input {
+	width:100%;
+	border:none;
+}
+.address-uname {
+	width:5rem;
+}
+.set-default {
+	padding:1.5rem 1.8rem;
+	border-top:1px solid #ebebeb;
+}
+.set-default i {
+	margin-right:5px;
+}
+.row-3 span {
+	margin-left:5px;
+}
+.girl {
+	margin-left:1rem;
+}
+.row:last-child > div {
+	border-bottom:none;
+}
+.icon-checked {
+	color:#ff6733;
+}
+.icon-checked:before { content: "\e661"; }
+.icon-check:before { content: "\e660"; }

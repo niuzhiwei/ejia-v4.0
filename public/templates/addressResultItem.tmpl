@@ -1,0 +1,16 @@
+<%for(var i=0;i<records.length;i++){%>
+<div class='row' data-address-area='<%=records[i].title+records[i].address%>' data-lng='<%=records[i].point.lng%>' data-lat='<%=records[i].point.lat%>'>
+	<div class='col-1'>
+		<i class="iconfont">&#xe656;</i>
+	</div>
+	<div class='col-2'>
+		<p class='address-house'>
+			<%if(i==0){%>
+				[当前]
+			<%}%>
+			<%=records[i].title%>	
+		</p>
+		<p class='address-street'><%=records[i].address%></p>
+	</div>
+</div>
+<%}%>
