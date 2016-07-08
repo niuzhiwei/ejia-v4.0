@@ -148,7 +148,9 @@ var step2Tmpl=new Template({
 			        	pageParams.agreedTime=$("#appointTime").val().split('  ')[0];
 			        	//周期订单
 			            if(pageParams.type=='monthly'){
-			                var selectedDate=util.getDate($("#appointTime").val().split('  ')[0]);
+			                var timeArr=$("#appointTime").val().split('  ');
+			            	var selectedDate=util.getDate(timeArr[0]);
+			                pageParams.hours=timeArr[1].substring(0,timeArr[1].length-2);
 			                if(selectedDate.getDay()==0){
 			                    pageParams.selectedDay=7;
 			                }else{
@@ -562,11 +564,12 @@ var step2Tmpl=new Template({
                 		var weeks=$('#weeks').find('.nums').text();
                 		var daylength=weeks*7;
                 		var monthDays=[];
+                		var firstTime=util.getDate(begtime);
                 		for(var i=0;i<daylength;i++){
                 			//注意赋值给变量后再调用getDay报错
                 			//var monthday=d.setDate(d.getDate()+i);
 							//console.log(monthday.getDay());
-							var d = new Date();
+							var d = new Date(firstTime);
 							d.setDate(d.getDate()+i);
 							var weeknum=d.getDay();
 							if(weeknum==0){
@@ -576,8 +579,7 @@ var step2Tmpl=new Template({
 			                    var me=$(this);
 			                    if(me.hasClass('fill-current')){
 			                        if(me.data('weeknum')==weeknum){
-			                        	var firstTime=util.getDate(begtime).getTime();
-			                        	if(d.getTime()>=firstTime){
+			                        	if(d.getTime()>=firstTime.getTime()){
 				                        	var item=util.formatDate('yyyy-MM-dd',d)+' '+begtimeHour+'-'+endtimeHour;
 				                            monthDays.push(item);
 				                        }
