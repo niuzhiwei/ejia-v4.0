@@ -30,6 +30,9 @@ var pageParams={
 	appointTime:{data:null,type:util.urlParam('type')},
  	myAunt:[],
 	providers:'',
+	orderRemark:'',//留言
+	requireItemsSl:[],//要求
+	floorSpace:'',//房屋面积
 	weekTimes:1,
  	selectedDay:'',//周期订单所选日期对应的星期，用于日期验证
  	monthDays:[]//周期订单所选的具体日期
@@ -37,8 +40,8 @@ var pageParams={
 function requireItemMap(serviceclass){
 	var map={
 		'0001000300010001':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'],
-		'0001000300010002':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'],
-		'0001000300020001':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁']
+		'0001000300010002':['上门前请联系我','深度清洁最赞啦','家有宠物请小心','速度与清洁并重'],
+		'0001000300020001':['上门前请联系我','深度清洁最赞啦','家有宠物请小心','速度与清洁并重']
 	}
 	return map[serviceclass];
 }
@@ -51,10 +54,8 @@ var step1Tmpl2=new Template({
 	tmplName:require('../templates/addressSelect.tmpl'),
 	tmplData:{}
 });
+
 var step2Data={};
-step2Data.appointTime=pageParams.appointTime;
-step2Data.myAunt=pageParams.myAunt;
-step2Data.requireItems=requireItemMap(pageParams.serviceclass);
 var step2Tmpl=new Template({
 	tmplName:require('../templates/fillOrderTime.tmpl'),
 	tmplData:step2Data
@@ -99,6 +100,13 @@ var step2Tmpl=new Template({
 	function main(){
 		if(pageParams.currentStep==2){
 			step2Data.monthDays=pageParams.monthDays;
+			//保留留言数据，防止选择手艺人后被置空
+			step2Data.appointTime=pageParams.appointTime;
+			step2Data.myAunt=pageParams.myAunt;
+			step2Data.requireItems=requireItemMap(pageParams.serviceclass);
+			step2Data.orderRemark=pageParams.orderRemark;
+			step2Data.requireItemsSl=pageParams.requireItemsSl;
+			step2Data.floorSpace=pageParams.floorSpace;
 			tmpl=step1Tmpl.getHtml()+step2Tmpl.getHtml();
 			//$('.page-3').html(step2Tmpl2.getHtml());
 		}else if(pageParams.currentStep==1){
@@ -137,6 +145,7 @@ var step2Tmpl=new Template({
 			        newColumn:newColumn,
 			        rowtype:rowtype,
 			        onSelect: function (valueText, inst) {
+			        	pageParams.agreedTime=$("#appointTime").val().split('  ')[0];
 			        	//周期订单
 			            if(pageParams.type=='monthly'){
 			                var selectedDate=util.getDate($("#appointTime").val().split('  ')[0]);
@@ -146,6 +155,13 @@ var step2Tmpl=new Template({
 			                    pageParams.selectedDay=selectedDate.getDay();
 			                }
 			                //alert(pageParams.selectedDay);
+			            }else if(pageParams.type=='daily'){
+			            	var timeArr=$("#appointTime").val().split('  ');
+			            	var selectedDate=util.getDate(timeArr[0]);
+			            	pageParams.hours=timeArr[1].substring(0,timeArr[1].length-2);
+			            	var endTime=selectedDate.getTime()+pageParams.hours*60*60*1000;
+			            	var endHour=util.formatDate('yyyy-MM-dd hh:mm',endTime).split(' ')[1];
+			            	$("#appointTime").val(timeArr[0]+'-'+endHour);
 			            }
 		             	$('.next-step').text('提交订单');
 						pageParams.appointTime.data=$("#appointTime").val();
@@ -195,11 +211,13 @@ var step2Tmpl=new Template({
 			}
 		})
 		$('.page-1 .table').on('click','.address-for',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-2');
 			},500);
 		})
 		$('.page-1 .table').on('click','.hot-aunt',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-3');
 			},500);
@@ -214,6 +232,7 @@ var step2Tmpl=new Template({
 		})
 		//周日保洁选择日期
 		$('.page-1 .table').on('click','.monthly-time',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-4');
 			},500);
@@ -401,7 +420,9 @@ var step2Tmpl=new Template({
     		}
     	})
     	$('.myAunt-btn').click(function(){
-    		 $('.aunt-item').find('div.iconfont').each(function() {
+    		pageParams.providers="";
+    		pageParams.myAunt=[];
+		 	$('.aunt-item').find('div.iconfont').each(function() {
                 var me=$(this);
                 var userid=me.data('userid'),
                     name=me.data('name'),
@@ -433,7 +454,7 @@ var step2Tmpl=new Template({
 	function newOrder(){
 	    $('.page-overlay').show();
 	    $('.page-tips').text('数据提交中，请稍后···');
-	    var serviceTime=$("#appointTime").val().split('  ');
+	    //var serviceTime=$("#appointTime").val().split('  ');
 	    var address=$('.address-for');
 	    var data = {};
 	    data.customerId=pageParams.userInfo.data.id;
@@ -442,9 +463,9 @@ var step2Tmpl=new Template({
 	    data.baiduMapLng=address.data('lng');
 	    data.baiduMapLat=address.data('lat');
      	data.contactMobile=address.data('phone');
-	    data.orderAgreedTime=serviceTime[0];
-	    if(serviceTime.length>1){
-	    	data.ordernum=serviceTime[1].substring(0,serviceTime[1].length-2);
+	    data.orderAgreedTime=pageParams.agreedTime;
+	    if(!!pageParams.hours){
+	    	data.ordernum=pageParams.hours;
 	    }
 	    if(pageParams.type=='window' || pageParams.type=='wasteland'){
 	    	data.ordernum=$('.floor-space').val();
@@ -555,8 +576,11 @@ var step2Tmpl=new Template({
 			                    var me=$(this);
 			                    if(me.hasClass('fill-current')){
 			                        if(me.data('weeknum')==weeknum){
-			                        	var item=util.formatDate('yyyy-MM-dd',d)+' '+begtimeHour+'-'+endtimeHour;
-			                            monthDays.push(item);
+			                        	var firstTime=util.getDate(begtime).getTime();
+			                        	if(d.getTime()>=firstTime){
+				                        	var item=util.formatDate('yyyy-MM-dd',d)+' '+begtimeHour+'-'+endtimeHour;
+				                            monthDays.push(item);
+				                        }
 			                        }
 			                    }
 			                })
@@ -568,6 +592,18 @@ var step2Tmpl=new Template({
                 }
     		}
     	})
+    }
+    function setRemark(){
+    	pageParams.orderRemark=$('.order-remark').val();
+        pageParams.requireItemsSl=[];
+        pageParams.floorSpace=$('.floor-space').val();
+        $('.require-item').each(function(){
+        	if($(this).hasClass('require-current')){
+        		pageParams.requireItemsSl.push($(this).text());
+        	}else{
+        		pageParams.requireItemsSl.push('');
+        	}
+        })
     }
 })(jQuery);
 

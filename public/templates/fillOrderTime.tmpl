@@ -24,7 +24,7 @@
 				<i class="iconfont">&#xe65a;</i>
 			</div>
 			<div class='col-2'>
-				<input type="text" class="floor-space" placeholder="请填写房屋面积（㎡）">
+				<input type="text" class="floor-space" placeholder="请填写房屋面积（㎡）" value="<%=floorSpace%>">
 			</div>
 			<div class='arrow'>
 			</div>
@@ -35,9 +35,13 @@
 			<i class="iconfont">&#xe65a;</i>
 		</div>
 		<div class='col-2'>
-			<input type="text" class="order-remark" placeholder="请输入留言内容">
+			<input type="text" class="order-remark" placeholder="请输入留言内容" value="<%=orderRemark%>">
 			<%for(var i=0;i<requireItems.length;i++){%>
-				<span class='require-item'><%=requireItems[i]%></span>
+				<%if(requireItems[i]==requireItemsSl[i]){%>
+					<span class='require-item require-current'><%=requireItems[i]%></span>
+				<%}else{%>
+					<span class='require-item'><%=requireItems[i]%></span>
+				<%}%>			
 			<%}%>
 		</div>
 		<div class='arrow'>

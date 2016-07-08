@@ -30,29 +30,30 @@ var pageParams={
 	appointTime:{data:null,type:util.urlParam('type')},
  	myAunt:[],
 	providers:'',
+	orderRemark:'',
 	list:{data:[],type:util.urlParam('type')}
 };
 
-var requireItem=['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'];
+var requireItem=[];
 function typeMap(type){
 	var map={
 		'fotile':[
-				{img:require('../images/cleaning/fotile/style-1.png'),name:'欧式油烟机',price:'160元/台',type:'0001000300020004',title:'欧式油烟机（160元）'},
-				{img:require('../images/cleaning/fotile/style-2.png'),name:'中式油烟机',price:'160元/台',type:'0001000300020003',title:'中式油烟机（160元）'},
-				{img:require('../images/cleaning/fotile/style-3.png'),name:'侧吸式油烟机',price:'160元/台',type:'0001000300020005',title:'侧吸式油烟机（160元）'}
+				{img:require('../images/cleaning/fotile/style-1.png'),name:'欧式油烟机',price:'160元/台',type:'0001000300020004',title:'欧式油烟机（160元/台）'},
+				{img:require('../images/cleaning/fotile/style-2.png'),name:'中式油烟机',price:'160元/台',type:'0001000300020003',title:'中式油烟机（160元/台）'},
+				{img:require('../images/cleaning/fotile/style-3.png'),name:'侧吸式油烟机',price:'160元/台',type:'0001000300020005',title:'侧吸式油烟机（160元/台）'}
 		],
 		'air':[
-				{img:require('../images/cleaning/air/p1.jpg'),name:'挂式空调',price:'145元/台',type:'00010003000400030001',title:'挂式空调（145元）'},
-				{img:require('../images/cleaning/air/p2.jpg'),name:'柜式空调',price:'170元/台',type:'00010003000400030002',title:'柜式空调（170元）'}
+				{img:require('../images/cleaning/air/p1.jpg'),name:'挂式空调',price:'145元/台',type:'00010003000400030001',title:'挂式空调（145元/台）'},
+				{img:require('../images/cleaning/air/p2.jpg'),name:'柜式空调',price:'170元/台',type:'00010003000400030002',title:'柜式空调（170元/台）'}
 		],
 		'icebox':[
-				{img:require('../images/cleaning/icebox/p1.jpg'),name:'单/双门冰箱',price:'99元/台',type:'00010003000400010001',title:'单/双门冰箱（99元）'},
-				{img:require('../images/cleaning/icebox/p2.jpg'),name:'三开门冰箱',price:'180元/台',type:'00010003000400010002',title:'三开门冰箱（180元）'},
-				{img:require('../images/cleaning/icebox/p3.jpg'),name:'对开门冰箱',price:'230元/台',type:'00010003000400010003',title:'对开门冰箱（230元）'}
+				{img:require('../images/cleaning/icebox/p1.jpg'),name:'单/双门冰箱',price:'99元/台',type:'00010003000400010001',title:'单/双门冰箱（99元/台）'},
+				{img:require('../images/cleaning/icebox/p2.jpg'),name:'三开门冰箱',price:'180元/台',type:'00010003000400010002',title:'三开门冰箱（180元/台）'},
+				{img:require('../images/cleaning/icebox/p3.jpg'),name:'对开门冰箱',price:'230元/台',type:'00010003000400010003',title:'对开门冰箱（230元/台）'}
 		],
 		'washer':[
-				{img:require('../images/cleaning/icebox/p1.jpg'),name:'波轮洗衣机',price:'130元/台',type:'00010003000400020001',title:'波轮洗衣机（130元）'},
-				{img:require('../images/cleaning/icebox/p2.jpg'),name:'滚筒洗衣机',price:'165元/台',type:'00010003000400020002',title:'滚筒洗衣机（165元）'}
+				{img:require('../images/cleaning/washer/p1.jpg'),name:'波轮洗衣机',price:'130元/台',type:'00010003000400020001',title:'波轮洗衣机（130元/台）'},
+				{img:require('../images/cleaning/washer/p2.jpg'),name:'滚筒洗衣机',price:'165元/台',type:'00010003000400020002',title:'滚筒洗衣机（165元/台）'}
 		]
 	}
 	return map[type];
@@ -67,10 +68,8 @@ var step1Tmpl2=new Template({
 	tmplName:require('../templates/addressSelect.tmpl'),
 	tmplData:{}
 });
+
 var step2Data={};
-step2Data.appointTime=pageParams.appointTime;
-step2Data.myAunt=pageParams.myAunt;
-step2Data.requireItems=requireItem;
 var step2Tmpl=new Template({
 	tmplName:require('../templates/fillOrderTime.tmpl'),
 	tmplData:step2Data
@@ -119,6 +118,10 @@ var step3Tmpl=new Template({
 	function main(){
 		if(pageParams.currentStep==3){
 			pageParams.list.data=pageParams.typeList;
+			step2Data.appointTime=pageParams.appointTime;
+			step2Data.myAunt=pageParams.myAunt;
+			step2Data.requireItems=requireItem;
+			step2Data.orderRemark=pageParams.orderRemark;
 			tmpl=step1Tmpl.getHtml()+step3Tmpl.getHtml()+step2Tmpl.getHtml();
 		}
 		else if(pageParams.currentStep==2){
@@ -195,11 +198,13 @@ var step3Tmpl=new Template({
 			}
 		})
 		$('.page-1 .table').on('click','.address-for',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-2');
 			},500);
 		})
 		$('.page-1 .table').on('click','.hot-aunt',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-3');
 			},500);
@@ -214,6 +219,7 @@ var step3Tmpl=new Template({
 		})
 		//家电类型
 		$('.page-1 .table').on('click','.fotile-type',function(){
+			setRemark();
 			setTimeout(function(){
 				showPage('.page-4');
 			},500);
@@ -392,7 +398,9 @@ var step3Tmpl=new Template({
     		}
     	})
     	$('.myAunt-btn').click(function(){
-    		 $('.aunt-item').find('div.iconfont').each(function() {
+		 	pageParams.myAunt=[];
+        	pageParams.providers='';
+		 	$('.aunt-item').find('div.iconfont').each(function() {
                 var me=$(this);
                 var userid=me.data('userid'),
                     name=me.data('name'),
@@ -495,6 +503,9 @@ var step3Tmpl=new Template({
 				},500);
     		}
     	})
+    }
+ 	function setRemark(){
+    	pageParams.orderRemark=$('.order-remark').val();
     }
 })(jQuery);
 

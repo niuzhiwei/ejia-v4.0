@@ -232,6 +232,7 @@ input {
 	text-align:center;
 	display:none;
 	border-collapse:separate;
+	color:#ff6733;
 }
 .daily-monthly .row > div {
 	border: 1px solid #ff6733;
@@ -308,6 +309,7 @@ input {
 .set-num {
 	width:10rem;
 	float:right;
+	margin-right:1.5rem;
 }
 .set-num > div {
 	height:3rem;
