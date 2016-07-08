@@ -1,11 +1,17 @@
 <%if(data.area){%>
 	<%if(!!type){%>
-		<div class='row'>
+		<div class='row service-title'>
 			<div class='col-1'>
 				<i class="iconfont">&#xe654;</i>
 			</div>
 			<div class='col-2'>
-				<span><%=servicename%></span>
+				<span>
+					<%if(type=='monthly'){%>
+						日常保洁（周期）
+					<%}else{%>
+						<%=servicename%>
+					<%}%>
+				</span>
 			</div>
 			<div class='arrow'>
 			</div>
@@ -27,12 +33,18 @@
 	</div>
 <%}else{%>
 	<%if(!!type){%>
-		<div class='row'>
+		<div class='row service-title'>
 			<div class='col-1'>
 				<i class="iconfont">&#xe654;</i>
 			</div>
 			<div class='col-2'>
-				<span><%=servicename%></span>
+				<span>
+					<%if(type=='monthly'){%>
+						日常保洁（周期）
+					<%}else{%>
+						<%=servicename%>
+					<%}%>
+				</span>
 			</div>
 			<div class='arrow'>
 			</div>

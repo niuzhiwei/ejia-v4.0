@@ -1,0 +1,28 @@
+<div class='row fotile-type'>
+	<div class='col-1'>
+		<i class="iconfont">&#xe654;</i>
+	</div>
+	<div class='col-2'>
+		<%if(data.length>0){%>
+			<label data-value='1'>
+				<%for(var i=0;i<data.length;i++){%>
+					<p><%=data[i].title%><span class='type-num'>×<span><%=data[i].num%></span></span></p>
+				<%}%>
+			</label>
+		<%}else{%>
+			<label data-value=''>
+				<%if(type=='fotile'){%>
+					请选择油烟机类型
+				<%}else if(type=='air'){%>
+					请选空调类型
+				<%}else if(type=='icebox'){%>
+					请选冰箱类型
+				<%}else if(type=='washer'){%>
+					请选洗衣机类型
+				<%}%>
+			</label>
+		<%}%>
+	</div>
+	<div class='arrow'>
+	</div>
+</div>

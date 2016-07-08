@@ -3,6 +3,7 @@ $.noConflict();//引用jquery插件，解决与Zepto的冲突
 
 require('../stylesheets/common.css');
 require('../stylesheets/fillOrder.css');
+require('../stylesheets/fillFotile.css');
 
 var Template=require('./core/Template.js');
 var Util=require('./core/Util.js');
@@ -17,31 +18,46 @@ var Apis={
 	delAddress:'/removte/user/deleteUseraddress',
 	editUseraddress:'/removte/user/editUseraddress',
 	getMyProviders:'/removte/provider/getMyProviders',
-	saveOrderform:'/removte/order/saveOrderform',
- 	saveCycleOrderform:'/removte/order/saveCycleOrderform'
+	saveOrderform:'/removte/order/saveOrderform'
 };
 
 var pageParams={
-	serviceclass:util.urlParam('serviceclass'),
 	type:util.urlParam('type'),
+	serviceclass:'',
 	currentStep:1,
 	stepEnd:0,
-	address:{data:{},type:util.urlParam('type'),servicename:util.serviceTypeMap(util.urlParam('serviceclass'))},
+	address:{data:{},type:0},
 	appointTime:{data:null,type:util.urlParam('type')},
  	myAunt:[],
 	providers:'',
-	weekTimes:1,
- 	selectedDay:'',//周期订单所选日期对应的星期，用于日期验证
- 	monthDays:[]//周期订单所选的具体日期
+	list:{data:[],type:util.urlParam('type')}
 };
-function requireItemMap(serviceclass){
+
+var requireItem=['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'];
+function typeMap(type){
 	var map={
-		'0001000300010001':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'],
-		'0001000300010002':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁'],
-		'0001000300020001':['上门前请联系','家有宠物','重点打扫厨房','重点打扫卫生间','深度清洁']
+		'fotile':[
+				{img:require('../images/cleaning/fotile/style-1.png'),name:'欧式油烟机',price:'160元/台',type:'0001000300020004',title:'欧式油烟机（160元）'},
+				{img:require('../images/cleaning/fotile/style-2.png'),name:'中式油烟机',price:'160元/台',type:'0001000300020003',title:'中式油烟机（160元）'},
+				{img:require('../images/cleaning/fotile/style-3.png'),name:'侧吸式油烟机',price:'160元/台',type:'0001000300020005',title:'侧吸式油烟机（160元）'}
+		],
+		'air':[
+				{img:require('../images/cleaning/air/p1.jpg'),name:'挂式空调',price:'145元/台',type:'00010003000400030001',title:'挂式空调（145元）'},
+				{img:require('../images/cleaning/air/p2.jpg'),name:'柜式空调',price:'170元/台',type:'00010003000400030002',title:'柜式空调（170元）'}
+		],
+		'icebox':[
+				{img:require('../images/cleaning/icebox/p1.jpg'),name:'单/双门冰箱',price:'99元/台',type:'00010003000400010001',title:'单/双门冰箱（99元）'},
+				{img:require('../images/cleaning/icebox/p2.jpg'),name:'三开门冰箱',price:'180元/台',type:'00010003000400010002',title:'三开门冰箱（180元）'},
+				{img:require('../images/cleaning/icebox/p3.jpg'),name:'对开门冰箱',price:'230元/台',type:'00010003000400010003',title:'对开门冰箱（230元）'}
+		],
+		'washer':[
+				{img:require('../images/cleaning/icebox/p1.jpg'),name:'波轮洗衣机',price:'130元/台',type:'00010003000400020001',title:'波轮洗衣机（130元）'},
+				{img:require('../images/cleaning/icebox/p2.jpg'),name:'滚筒洗衣机',price:'165元/台',type:'00010003000400020002',title:'滚筒洗衣机（165元）'}
+		]
 	}
-	return map[serviceclass];
+	return map[type];
 }
+
 var tmpl='';
 var step1Tmpl=new Template({
 	tmplName:require('../templates/fillAddress.tmpl'),
@@ -54,10 +70,14 @@ var step1Tmpl2=new Template({
 var step2Data={};
 step2Data.appointTime=pageParams.appointTime;
 step2Data.myAunt=pageParams.myAunt;
-step2Data.requireItems=requireItemMap(pageParams.serviceclass);
+step2Data.requireItems=requireItem;
 var step2Tmpl=new Template({
 	tmplName:require('../templates/fillOrderTime.tmpl'),
 	tmplData:step2Data
+});
+var step3Tmpl=new Template({
+	tmplName:require('../templates/fillFotile.tmpl'),
+	tmplData:pageParams.list
 });
 (function($){
 	if(sessionStorage.userInfo){
@@ -93,33 +113,30 @@ var step2Tmpl=new Template({
 		}
 		renderAddressList();
 		renderMyAunt();
-		renderMonthTime();
+		renderFotile();
 		bindEvents();
 	}
 	function main(){
-		if(pageParams.currentStep==2){
-			step2Data.monthDays=pageParams.monthDays;
-			tmpl=step1Tmpl.getHtml()+step2Tmpl.getHtml();
+		if(pageParams.currentStep==3){
+			pageParams.list.data=pageParams.typeList;
+			tmpl=step1Tmpl.getHtml()+step3Tmpl.getHtml()+step2Tmpl.getHtml();
+		}
+		else if(pageParams.currentStep==2){
+			tmpl=step1Tmpl.getHtml()+step3Tmpl.getHtml();
 			//$('.page-3').html(step2Tmpl2.getHtml());
 		}else if(pageParams.currentStep==1){
 			tmpl=step1Tmpl.getHtml();
 			//$('.page-2').html(step1Tmpl2.getHtml());
 		}
 		$('.page-1 .steps').html(tmpl);
-		if(pageParams.currentStep==2){
+		if(pageParams.currentStep==3){
 			var dateScroll = function(){
 			    var date = new Date();
 			    var curr = new Date().getFullYear(),
 			        d = date.getDate(),
 			        m = date.getMonth();
-			    var newColumn=1;
+			    var newColumn=0;
 			    var rowtype=0;
-			    if(pageParams.type=='window' || pageParams.type=='fotile'){
-			        newColumn=0;//玻璃清洗，无时长
-			    }else if(pageParams.type=='wasteland'){
-		    	 	newColumn=0;
-		            rowtype=3;//新居开荒每天8点-13:00，提前24小时
-			    }
 			    $('#appointTime').scroller({
 			        preset: 'datehour',
 			        //minDate: new Date(curr, m, d, 8, 00),
@@ -137,16 +154,6 @@ var step2Tmpl=new Template({
 			        newColumn:newColumn,
 			        rowtype:rowtype,
 			        onSelect: function (valueText, inst) {
-			        	//周期订单
-			            if(pageParams.type=='monthly'){
-			                var selectedDate=util.getDate($("#appointTime").val().split('  ')[0]);
-			                if(selectedDate.getDay()==0){
-			                    pageParams.selectedDay=7;
-			                }else{
-			                    pageParams.selectedDay=selectedDate.getDay();
-			                }
-			                //alert(pageParams.selectedDay);
-			            }
 		             	$('.next-step').text('提交订单');
 						pageParams.appointTime.data=$("#appointTime").val();
 						main();
@@ -155,13 +162,6 @@ var step2Tmpl=new Template({
 			    });
 			}
 			dateScroll();//时间选择控件
-		}
-		if(pageParams.type=='daily'){
-			$('.daily-monthly').css({'display':'table'});
-			$('.fill-daily').addClass('dm-current');
-		}else if(pageParams.type=='monthly'){
-			$('.daily-monthly').css({'display':'table'});
-			$('.fill-monthly').addClass('dm-current');
 		}
 	}
 	//$("#appDate").mobiscroll("show");
@@ -178,7 +178,7 @@ var step2Tmpl=new Template({
 					}
 				});
 				if(flag){
-					if(pageParams.currentStep==2){
+					if(pageParams.currentStep==3){
 						setTimeout(function(){
 							$("#appointTime").mobiscroll("show");
 						},350);
@@ -188,7 +188,7 @@ var step2Tmpl=new Template({
 						if(pageParams.currentStep==1){
 							showPage('.page-2');
 						}else if(pageParams.currentStep==2){
-							showPage('.page-4');//周期保洁日期选择
+							showPage('.page-4');//家电类型
 						}
 					},350);
 				}
@@ -212,8 +212,8 @@ var step2Tmpl=new Template({
     			$item.addClass('require-current');
     		}
 		})
-		//周日保洁选择日期
-		$('.page-1 .table').on('click','.monthly-time',function(){
+		//家电类型
+		$('.page-1 .table').on('click','.fotile-type',function(){
 			setTimeout(function(){
 				showPage('.page-4');
 			},500);
@@ -225,10 +225,9 @@ var step2Tmpl=new Template({
 			var plus=parseInt(value)+1;
 			var max=$(this).data('max');
 			if(value<max){
+				$('.nums').text('0');//置空其他品类
 				nums.text(plus);
 				minus.removeClass('disabled');
-			 	$('.week-num').text(plus);
-	            $('.week-total').text(pageParams.weekTimes*plus);
 	        }else{
 	        	$(this).addClass('disabled');
 	        }
@@ -243,18 +242,10 @@ var step2Tmpl=new Template({
 				if(value>min){
 					nums.text(minus);
 					plus.removeClass('disabled');
-					$('.week-num').text(minus);
-            		$('.week-total').text(pageParams.weekTimes*minus);
 				}else{
 					$(this).addClass('disabled');
 				}
 			}
-		})
-		$('.fill-daily').click(function(){
-			window.location.href='fillOrder.html?type=daily&serviceclass=0001000300010001';
-		})
-		$('.fill-monthly').click(function(){
-			window.location.href='fillOrder.html?type=monthly&serviceclass=0001000300010001';
 		})
 	}
 	function showPage(pageCurrent){
@@ -315,11 +306,11 @@ var step2Tmpl=new Template({
 			sessionStorage.remark=$('.remark').val();
 			sessionStorage.currentStep=pageParams.currentStep;
 			sessionStorage.stepEnd=pageParams.stepEnd;
-			window.location.href='newAddress.html?back=dailys&type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+			window.location.href='newAddress.html?back=fotiles&type='+pageParams.type;
 		})
 		$('.mod').on('click',function(){
 			var id=$(this).data('id');
-			window.location.href='addressEdit.html?back=dailys&type='+pageParams.type+'&id='+id+'&serviceclass='+pageParams.serviceclass;
+			window.location.href='addressEdit.html?back=fotiles&type='+pageParams.type+'&id='+id;
 		})
 		$('.del').on('click',function(){
 			var id=$(this).data('id');
@@ -443,12 +434,7 @@ var step2Tmpl=new Template({
 	    data.baiduMapLat=address.data('lat');
      	data.contactMobile=address.data('phone');
 	    data.orderAgreedTime=serviceTime[0];
-	    if(serviceTime.length>1){
-	    	data.ordernum=serviceTime[1].substring(0,serviceTime[1].length-2);
-	    }
-	    if(pageParams.type=='window' || pageParams.type=='wasteland'){
-	    	data.ordernum=$('.floor-space').val();
-	    }
+    	data.ordernum=$('.type-num span').text();
 	    data.serviceclass=pageParams.serviceclass;
 	    data.linkman=$('.linkman').text();
 	    var customerRemark=$('.order-remark').val()+'!';
@@ -463,21 +449,6 @@ var step2Tmpl=new Template({
             data.providers=pageParams.providers;
         }
         var url=Apis.saveOrderform;
-        if(pageParams.type=='monthly'){
-        	url=Apis.saveCycleOrderform;
-        	data.weeknum=$('#weeks .nums').text();
-            var weekdays='';
-            $('.fill-week>div').each(function(){
-                var me=$(this);
-                if(me.hasClass('fill-current')){
-                    weekdays+=me.data('weeknum')+',';
-                }
-            })
-            if(weekdays!=''){
-                weekdays=weekdays.substring(0,weekdays.length-1);
-                data.weekdays=weekdays;
-            }
-        }
 	    var order=new FetchApi({
 	        urlApi:url,
 	        postData:data
@@ -492,80 +463,36 @@ var step2Tmpl=new Template({
 	        $('.page-overlay').hide();
 	    });
 	}
-	function renderMonthTime(){
+	function renderFotile(){
+		console.log(typeMap(pageParams.type));
         var appTmpl=new Template({
-            tmplName:require('../templates/monthlyTime.tmpl'),
-            tmplData:{}
+            tmplName:require('../templates/fotileType.tmpl'),
+            tmplData:{data:typeMap(pageParams.type)}
         });
 		$('.page-4').html(appTmpl.getHtml());
-		bindMonthEvents();
+		bindFotileEvents();
     }
-    function bindMonthEvents(){
-    	$('.fill-week > div').on('click',function(){
-		 	var me=$(this);
-            if(me.hasClass('fill-current')){
-                me.removeClass('fill-current');
-                pageParams.weekTimes--;
-            }else{
-                me.addClass('fill-current');
-                pageParams.weekTimes++;
-            }
-            $('.week-time').text(pageParams.weekTimes);
-            var weeks=$('#weeks').find('.nums').text();
-         	$('.week-total').text(pageParams.weekTimes*weeks);
-    	})
-    	$('.monthly-time-btn').on('click',function(){
-    		if($('.fill-week>div').hasClass('fill-current').length<1){
-    			toasts.show('请选择服务周期');
+    function bindFotileEvents(){
+    	$('.fotile-type-btn').click(function(){
+    		pageParams.typeList=[];
+    		$('.nums').each(function(){
+    			var nums=parseInt($(this).text());
+    			if(nums>0){
+    				pageParams.serviceclass=$(this).data('fotile-type');
+    				var item={};
+    				item.num=nums;
+    				item.title=$(this).data('fotile-title');
+    				pageParams.typeList.push(item);
+    			}
+    		})
+    		if(pageParams.serviceclass==''){
+    			toasts.show('请选择家电种类');
     		}else{
-    			var monthlyFlag=false;
-                $('.fill-week>div').each(function(){
-                    var me=$(this);
-                    if(me.hasClass('fill-current')){
-                    	//console.log(me.data('weeknum'));
-                        if(me.data('weeknum')==pageParams.selectedDay){
-                            monthlyFlag=true;
-                        }
-                    }
-                })
-                if(!monthlyFlag){
-                    toasts.alert('上门时间必须在上门周期所选的时间范围内');
-                    $('#appointTime').val('');
-                }else{
-                	var begtime=$('#appointTime').val().split('  ')[0];
-                	var begtimeHour=begtime.split(' ')[1];
-                	var endtime=util.getDate(begtime).getTime()+2*60*60*1000;
-                	var endtimeHour=util.formatDate('yyyy-MM-dd hh:mm',endtime).split(' ')[1];
-                	setTimeout(function(){
-                		//周期内所选的具体日期
-                		var weeks=$('#weeks').find('.nums').text();
-                		var daylength=weeks*7;
-                		var monthDays=[];
-                		for(var i=0;i<daylength;i++){
-                			//注意赋值给变量后再调用getDay报错
-                			//var monthday=d.setDate(d.getDate()+i);
-							//console.log(monthday.getDay());
-							var d = new Date();
-							d.setDate(d.getDate()+i);
-							var weeknum=d.getDay();
-							if(weeknum==0){
-								weeknum=7;
-							}
-            			 	$('.fill-week>div').each(function(){
-			                    var me=$(this);
-			                    if(me.hasClass('fill-current')){
-			                        if(me.data('weeknum')==weeknum){
-			                        	var item=util.formatDate('yyyy-MM-dd',d)+' '+begtimeHour+'-'+endtimeHour;
-			                            monthDays.push(item);
-			                        }
-			                    }
-			                })
-                		}	
-                		pageParams.monthDays=monthDays;
-		            	main();
-						showPage('.page-1');
-					},500);
-                }
+			 	setTimeout(function(){
+			 		pageParams.currentStep=3;
+	            	main();
+					showPage('.page-1');
+				},500);
     		}
     	})
     }

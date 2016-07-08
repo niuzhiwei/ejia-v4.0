@@ -226,6 +226,30 @@ input {
 	vertical-align: top;
     padding-top: 2.3rem;
 }
+.daily-monthly {
+	padding:1.5rem;
+	font-size:1.6rem;
+	text-align:center;
+	display:none;
+	border-collapse:separate;
+}
+.daily-monthly .row > div {
+	border: 1px solid #ff6733;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.fill-daily{
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+}
+.fill-monthly{
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+.dm-current{
+	background:#ff6733;
+	color:#fff;
+}
 /**时间插件**/
 .android-ics .dwv{
 	border-bottom:2px solid #ff6733;

@@ -4,8 +4,12 @@
 			<i class="iconfont">&#xe657;</i>
 		</div>
 		<div class='col-2'>
-			<%if(appointTime.type=='monthly'){%>
-				<label data-value='<%=appointTime.data%>' class='monthly-time'><%=appointTime.data%></label>
+			<%if(appointTime.type=='monthly'){%>	
+				<label data-value='1' class='monthly-time'>
+					<%for(var i=0;i<monthDays.length;i++){%>
+						<p><%=monthDays[i]%></p>
+					<%}%>
+				</label>
 			<%}else{%>
 				<input id="appointTime" type="text" placeholder="请选择服务时间" value='<%=appointTime.data%>'/>
 			<%}%>
@@ -14,6 +18,18 @@
 			<i class="iconfont">&#xe658;</i>
 		</div>
 	</div>
+	<%if(appointTime.type=='window' || appointTime.type=='wasteland'){%>
+		<div class='row'>
+			<div class='col-1'>
+				<i class="iconfont">&#xe65a;</i>
+			</div>
+			<div class='col-2'>
+				<input type="text" class="floor-space" placeholder="请填写房屋面积（㎡）">
+			</div>
+			<div class='arrow'>
+			</div>
+		</div>
+	<%}%>
 	<div class='row to-remark'>
 		<div class='col-1'>
 			<i class="iconfont">&#xe65a;</i>

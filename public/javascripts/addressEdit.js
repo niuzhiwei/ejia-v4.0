@@ -16,7 +16,8 @@ var Apis={
 var pageParams={
 	id:util.urlParam('id'),
 	type:util.urlParam('type'),
-	serviceclass:util.urlParam('serviceclass')
+	serviceclass:util.urlParam('serviceclass'),
+	back:util.urlParam('back')
 };
 if(sessionStorage.userInfo){
 	main();
@@ -71,7 +72,13 @@ function render(data){
 }
 function bindEvents(){
 	$('.container').on('click','.address-area',function(){
-		window.location.href='newAddress.html?type=fillOrder&serviceclass='+pageParams.serviceclass+'&id='+pageParams.id;
+		if(pageParams.back=='dailys'){
+			window.location.href='newAddress.html?back=dailys&type='+pageParams.type+'&serviceclass='+pageParams.serviceclass+'&id='+pageParams.id;
+		}else if(pageParams.back=='fotiles'){
+			window.location.href='newAddress.html?back=fotiles&type='+pageParams.type+'&id='+pageParams.id;
+		}else{
+			window.location.href='newAddress.html?type=fillOrder&serviceclass='+pageParams.serviceclass+'&id='+pageParams.id;
+		}
 	})
 	$('.container').on('click','.row-3 label',function(){
 		$('.row-3 label').find('i').each(function(){
@@ -137,7 +144,13 @@ function bindEvents(){
 		    			msg='修改地址成功！';
 		    		}
 		        	toasts.alert(msg,function(){
-		        		window.location.href='address.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+		        		if(pageParams.back=='dailys'){
+		        			window.location.href='address.html?back=dailys&type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+		        		}else if(pageParams.back=='fotiles'){
+		        			window.location.href='address.html?back=fotiles&type='+pageParams.type;
+		        		}else{
+		        			window.location.href='address.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+		        		}
 		        	});
 		        }else{
 		        	toasts.alert(this.records.message);

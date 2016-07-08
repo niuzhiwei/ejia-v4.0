@@ -16,6 +16,6 @@ function main(){
 }
 function bindEvents(){
 	$('.fixed-btn button').click(function(event) {
-		window.location.href='/wechat/fillOrder.html?type=cleanWindow';
+		window.location.href='fillOrder.html?type=window&serviceclass=0001000300020001';
 	});
 }

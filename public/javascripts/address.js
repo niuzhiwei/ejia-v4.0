@@ -19,8 +19,7 @@ var Apis={
 var pageParams={
 	type:util.urlParam('type'),
 	serviceclass:util.urlParam('serviceclass'),
-	//旧版空调洗衣机油烟机冰箱
-	fotileOther:util.urlParam('fotileOther')
+	back:util.urlParam('back')//地址跳回订单页，区分日常类还是家电类
 };
 if(sessionStorage.userInfo){
 	main();
@@ -69,13 +68,12 @@ function bindEvents(){
 			sessionStorage.address=JSON.stringify(address);
 			if(pageParams.type==='fillOrder'){
 				window.location.href='fillNurse.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
-			}else{
-				//旧版订单填写
-				sessionStorage.addressArea=$(this).data('area');
-                sessionStorage.addressHouse=$(this).data('door');
-                sessionStorage.baiduMapLat=$(this).data('lat');
-                sessionStorage.baiduMapLng=$(this).data('lng');
-				window.location.href='/wechat/fillOrder.html?type='+pageParams.type+'&fotileOther='+pageParams.fotileOther;
+			}else if(pageParams.back==='dailys'){
+				//适用于日常保洁、玻璃、新居开荒
+				window.location.href='fillOrder.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+			}else if(pageParams.back==='fotiles'){
+				//适用于家电类
+				window.location.href='fillFotile.html?type='+pageParams.type;
 			}		
 		})
 	}

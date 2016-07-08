@@ -16,6 +16,6 @@ function main(){
 }
 function bindEvents(){
 	$('.fixed-btn button').click(function(event) {
-		window.location.href='/wechat/fillOrder.html?type=fotile&fotileOther=washer';
+		window.location.href='fillFotile.html?type=washer';
 	});
 }

@@ -1,0 +1,26 @@
+<div class='page-content'>
+	<div class='fotile-title'>请选择清洗数量</div>
+	<div class="table type-sl">
+		<%for(var i=0;i<data.length;i++){%>
+			<div class='row'>
+				<div class="type-icon">
+					<img src="<%=data[i].img%>"/>
+				</div>
+				<div>
+					<span><%=data[i].name%></span>
+					<p><%=data[i].price%></p>
+				</div>
+				<div>
+					<div class='flex-box set-num' id='weeks'>
+						<div class='num-minus disabled' data-min='0'>-</div>
+						<div><span class='nums' data-fotile-type='<%=data[i].type%>' data-fotile-title='<%=data[i].title%>'>0</span><span class='unit'></span></div>
+						<div class='num-plus' data-max='4'>+</div>
+					</div>
+				</div>
+			</div>
+		<%}%>
+	</div>
+</div>
+<div class="page-nav">
+	<button type="button" class="fotile-type-btn">确定</button>
+</div>
