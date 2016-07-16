@@ -1,36 +1,41 @@
-<div class='page-content'>
-	<div class='table'>
-		<%for(var i=0;i<data.length;i++){%>
-			<div class="row aunt-item">
-				<div class="aunt-icon">
-					<%if(!!data[i].icon){%>
-						<img src="http://shangjia.exiangjia.com/<%=data[i].icon%>"/>
-					<%}else{%>
-						<img src="/images/wx/aunt_logo.png"/>
-					<%}%>
-				</div>
-				<div class="aunt-info-base">
-					<span><%=data[i].realname%></span>
-					<div class="aunt-level">
-						<%if(data[i].startlevel){%>
-							<%for(var j=0;j<data[i].startlevel;j++){%><!--不能用i循环了..-->
-								<img src='/images/wx/order/one_star.png' class="aunt-star"/>
+<div class='table'>
+	<%for(var i=0;i<list.length;i++){%>
+		<div class="row aunt-item" data-userid='<%=list[i].userid%>'>
+			<div class="aunt-icon">
+				<%if(!!list[i].icon){%>
+					<img src="<%=list[i].icon%>"/>
+				<%}else{%>
+					<img src="/images/wx/aunt_logo.png"/>
+				<%}%>
+				<%if(i==0&&firstResult==0){%>
+					<img src='../images/aunt/top1.png' class='top-flag'/>
+				<%}else if(i==1&&firstResult==0){%>
+					<img src='../images/aunt/top2.png' class='top-flag'/>
+				<%}else if(i==2&&firstResult==0){%>
+					<img src='../images/aunt/top3.png' class='top-flag'/>
+				<%}%>
+			</div>
+			<div class="aunt-info-base">
+				<p>
+					<span><%=list[i].realname%></span>
+					<span class="aunt-level">
+						<%if(list[i].startlevel){%>
+							<%for(var j=0;j<list[i].startlevel;j++){%><!--不能用i循环了..-->
+								<i class="iconfont aunt-star">&#xe676;</i>
 							<%}%>
 						<%}else{%>
-							<img src='/images/wx/order/one_star.png' class="aunt-star"/>
+							<i class="iconfont aunt-star">&#xe676;</i>
 						<%}%>
-					</div>
-				</div>
-				<div class="aunt-info-other">
-					<span>年龄：<%=data[i].age%>岁</span>
-					<p>接单量：<%=data[i].ordercount%>单</p>
-				</div>
-				<div class="iconfont icon-check if-2x" data-userid="<%=data[i].userid%>" data-name="<%=data[i].realname%>" data-icon="<%=data[i].icon%>">
-				</div>
+					</span>
+				</p>
+				<p>
+					<span>年龄：<%=list[i].age%>岁</span>
+					<span class='user-address'>籍贯：<%=list[i].useraddress%></span>
+				</p>
+				<p><span>已服务：<%=list[i].ordercount%>次</span></p>
 			</div>
-		<%}%>
-	</div>
-</div>
-<div class='page-nav'>
-	<button type="button" class="myAunt-btn">确定</button>
+			<div class="iconfont icon-check if-2x myAunt-check" data-userid="<%=list[i].userid%>" data-name="<%=list[i].realname%>" data-icon="<%=list[i].icon%>">
+			</div>
+		</div>
+	<%}%>
 </div>

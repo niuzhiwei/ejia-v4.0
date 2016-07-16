@@ -174,9 +174,11 @@ function bindEvents(){
 		window.location.href='home.html';
 	})
 }
-function showPage(page){
-	$('.page').css({'z-index':-1});
-	$(page).css({'z-index':1});
+function showPage(pageCurrent){
+	//$('.page').css({'z-index':-1});//无法解决多页面不同高度适配问题
+	//$(page).css({'z-index':1});
+	$('.page').hide();
+	$(pageCurrent).show();
 }
 function renderAddressList(){
 	var userInfo=new FetchApi({
@@ -193,7 +195,7 @@ function renderAddressList(){
 				tmplName:require('../templates/addressSelect.tmpl'),
 				tmplData:data
 			});
-        	$('.page-2').html(step1Tmpl2.getHtml());
+        	$('.page-2 .page-content').html(step1Tmpl2.getHtml());
         	bindAddressEvents();
         	//showPage('.page-2');
         	//window.location.href=''

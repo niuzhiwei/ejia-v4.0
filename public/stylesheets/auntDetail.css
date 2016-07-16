@@ -1,0 +1,90 @@
+body {
+	font-size:1.4rem;
+	background:#ebebeb;
+}
+.container {
+	padding-top: 0;
+}
+.banner {
+	background:url(../images/aunt/bg.jpg);
+	background-size:cover;
+	padding:2rem 1rem;
+}
+.aunt-icon img {
+	width:6rem;
+	height:6rem;
+	border-radius:50%;
+	margin:0 auto;
+}
+.base-info {
+	text-align:left;
+	line-height:2rem;
+}
+.aunt-name {
+	font-size:1.6rem;
+	font-weight:bold;
+}
+.aunt-times {
+	margin-left:2rem;
+}
+.user-address {
+	margin-left:2rem;
+}
+.title {
+	color:#ff6733;
+	font-size:1.6rem;
+	border-bottom:1px solid #000;
+	padding:1rem;
+}
+.items {
+	padding-left: 1.5rem;
+}
+.items > div {
+	border-bottom:1px solid #b5b5b5;
+	padding:1rem 0;
+}
+.items div:last-child {
+	border-bottom:none;
+}
+.item-des {
+	color:#8d8d8d;
+	margin-left:1rem;
+}
+.items img {
+	width:5rem;
+	display:inline-block;
+	margin-left:1rem;
+}
+.comment-tab {
+	padding:1rem;
+	border-bottom:1px solid #b5b5b5;
+}
+.comment-tab span {
+	color:#ff6733;
+	font-size:1.8rem;
+}
+.comment-tab p {
+	margin-top:5px;
+}
+.center-tab {
+	border-left:1px solid #b5b5b5;
+	border-right:1px solid #b5b5b5;
+}
+.content {
+	background:#fff;
+	margin-bottom:1rem;
+}
+.flex-box>div {
+	margin:0 0.5rem;
+}
+/**
+.go-back button {
+	background:#fff;
+	border:2px solid #ff6733;
+	color:#ff6733;
+}
+**/
+.comment-list {
+	top:28rem;
+	background:#fff;
+}

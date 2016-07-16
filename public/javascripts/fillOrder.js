@@ -18,7 +18,9 @@ var Apis={
 	editUseraddress:'/removte/user/editUseraddress',
 	getMyProviders:'/removte/provider/getMyProviders',
 	saveOrderform:'/removte/order/saveOrderform',
- 	saveCycleOrderform:'/removte/order/saveCycleOrderform'
+ 	saveCycleOrderform:'/removte/order/saveCycleOrderform',
+ 	providerTop:'/removte/provider/providerTop',
+ 	queryOrderInfo:'/removte/order/queryOrderInfo'
 };
 
 var pageParams={
@@ -35,7 +37,9 @@ var pageParams={
 	floorSpace:'',//房屋面积
 	weekTimes:1,
  	selectedDay:'',//周期订单所选日期对应的星期，用于日期验证
- 	monthDays:[]//周期订单所选的具体日期
+ 	monthDays:[],//周期订单所选的具体日期
+ 	orderno:util.urlParam('orderno'),
+ 	orderAgain:util.urlParam('orderAgain')//再来一单功能标识
 };
 function requireItemMap(serviceclass){
 	var map={
@@ -92,8 +96,12 @@ var step2Tmpl=new Template({
 				pageParams.currentStep=2;
 			}
 		}
+		getSession();
+		if(!!pageParams.orderAgain){
+			renderOrderAgain();
+		}
 		renderAddressList();
-		renderMyAunt();
+		//renderMyAunt('recently');
 		renderMonthTime();
 		bindEvents();
 	}
@@ -107,6 +115,7 @@ var step2Tmpl=new Template({
 			step2Data.orderRemark=pageParams.orderRemark;
 			step2Data.requireItemsSl=pageParams.requireItemsSl;
 			step2Data.floorSpace=pageParams.floorSpace;
+			//console.log(step2Data);
 			tmpl=step1Tmpl.getHtml()+step2Tmpl.getHtml();
 			//$('.page-3').html(step2Tmpl2.getHtml());
 		}else if(pageParams.currentStep==1){
@@ -114,6 +123,9 @@ var step2Tmpl=new Template({
 			//$('.page-2').html(step1Tmpl2.getHtml());
 		}
 		$('.page-1 .steps').html(tmpl);
+		if(pageParams.stepEnd){
+			$('.next-step').text('提交订单');
+		}
 		if(pageParams.currentStep==2){
 			var dateScroll = function(){
 			    var date = new Date();
@@ -146,21 +158,36 @@ var step2Tmpl=new Template({
 			        rowtype:rowtype,
 			        onSelect: function (valueText, inst) {
 			        	pageParams.agreedTime=$("#appointTime").val().split('  ')[0];
+			        	sessionStorage.agreedTime=pageParams.agreedTime;
 			        	//周期订单
 			            if(pageParams.type=='monthly'){
 			                var timeArr=$("#appointTime").val().split('  ');
 			            	var selectedDate=util.getDate(timeArr[0]);
 			                pageParams.hours=timeArr[1].substring(0,timeArr[1].length-2);
+			                sessionStorage.ordernum=pageParams.hours;
 			                if(selectedDate.getDay()==0){
 			                    pageParams.selectedDay=7;
 			                }else{
 			                    pageParams.selectedDay=selectedDate.getDay();
 			                }
+			                sessionStorage.weeknum=$('#weeks .nums').text();
+				            var weekdays='';
+				            $('.fill-week>div').each(function(){
+				                var me=$(this);
+				                if(me.hasClass('fill-current')){
+				                    weekdays+=me.data('weeknum')+',';
+				                }
+				            })
+				            if(weekdays!=''){
+				                weekdays=weekdays.substring(0,weekdays.length-1);
+				                sessionStorage.weekdays=weekdays;
+				            }
 			                //alert(pageParams.selectedDay);
 			            }else if(pageParams.type=='daily'){
 			            	var timeArr=$("#appointTime").val().split('  ');
 			            	var selectedDate=util.getDate(timeArr[0]);
 			            	pageParams.hours=timeArr[1].substring(0,timeArr[1].length-2);
+	            	 		sessionStorage.ordernum=pageParams.hours;
 			            	var endTime=selectedDate.getTime()+pageParams.hours*60*60*1000;
 			            	var endHour=util.formatDate('yyyy-MM-dd hh:mm',endTime).split(' ')[1];
 			            	$("#appointTime").val(timeArr[0]+'-'+endHour);
@@ -213,16 +240,19 @@ var step2Tmpl=new Template({
 			}
 		})
 		$('.page-1 .table').on('click','.address-for',function(){
-			setRemark();
+			setSession();
 			setTimeout(function(){
 				showPage('.page-2');
 			},500);
 		})
 		$('.page-1 .table').on('click','.hot-aunt',function(){
-			setRemark();
+			setSession();
+			window.location.href='myAunt.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
+			/**
 			setTimeout(function(){
 				showPage('.page-3');
 			},500);
+			**/
 		})
 		$('.page-1 .table').on('click','.require-item',function(){
 			var $item=$(this);
@@ -234,7 +264,7 @@ var step2Tmpl=new Template({
 		})
 		//周日保洁选择日期
 		$('.page-1 .table').on('click','.monthly-time',function(){
-			setRemark();
+			setSession();
 			setTimeout(function(){
 				showPage('.page-4');
 			},500);
@@ -272,15 +302,17 @@ var step2Tmpl=new Template({
 			}
 		})
 		$('.fill-daily').click(function(){
+			sessionStorage.removeItem('orderSeesion');
 			window.location.href='fillOrder.html?type=daily&serviceclass=0001000300010001';
 		})
 		$('.fill-monthly').click(function(){
+			sessionStorage.removeItem('orderSeesion');
 			window.location.href='fillOrder.html?type=monthly&serviceclass=0001000300010001';
 		})
 	}
 	function showPage(pageCurrent){
-		$('.page').css({'z-index':-1});
-		$(pageCurrent).css({'z-index':1});
+		$('.page').hide();
+		$(pageCurrent).show();
 	}
 	function renderAddressList(){
 		var userInfo=new FetchApi({
@@ -383,25 +415,33 @@ var step2Tmpl=new Template({
 		})
 	}
 	 //指定手艺人
-	function renderMyAunt(){
+	function renderMyAunt(type){
         var data = {};
         data.userid=pageParams.userInfo.data.id;
         data.serviceclass=pageParams.serviceclass;
+        var url;
+        if(type=='recently'){
+        	url=Apis.getMyProviders;
+        }else if(type=='hotly'){
+        	url=Apis.providerTop;
+        	data.flag=0;
+        }
         var address=new FetchApi({
-            urlApi:Apis.getMyProviders,
+            urlApi:url,
             postData:data
         },function(){
             if(this.records.code==200){
                 //alert(JSON.stringify(this.records));
                 var me=this;
                 if(this.records.data.length==0){
-                    toasts.show('暂无符合的手艺人');  
+                    //toasts.show('暂无符合的手艺人');  
                 }else{
                  	var appTmpl=new Template({
 			            tmplName:require('../templates/myAunt.tmpl'),
 			            tmplData:me.records
 			        });
         			$('.page-3').html(appTmpl.getHtml());
+        			$('.'+type).addClass('myAunt-tab-current');
         			bindAuntEvents();
                 }
             }else{
@@ -412,7 +452,11 @@ var step2Tmpl=new Template({
     }
     function bindAuntEvents(){
     	$('.aunt-item').click(function(){
-    		var $check=$(this).find('div.iconfont');
+    		var userid=$(this).data('userid');
+    		window.location.href='auntDetail.html?userid='+userid;
+    	})
+    	$('.myAunt-check').click(function(e){
+    		var $check=$(this);
     		if($check.hasClass('icon-check')){
     			$check.addClass('icon-checked');
     			$check.removeClass('icon-check');
@@ -420,6 +464,7 @@ var step2Tmpl=new Template({
     			$check.addClass('icon-check');
     			$check.removeClass('icon-checked');
     		}
+    		e.stopPropagation();
     	})
     	$('.myAunt-btn').click(function(){
     		pageParams.providers="";
@@ -444,6 +489,12 @@ var step2Tmpl=new Template({
 				showPage('.page-1');
 			},500);
     	})
+    	$('.myAunt-tab > div').click(function(){
+    		var type=$(this).data('type');
+    		if(!$(this).hasClass('myAunt-tab-current')){
+    			renderMyAunt(type);
+    		}
+    	})
     }
     function readSession(){
 		pageParams.currentStep=2;
@@ -456,7 +507,6 @@ var step2Tmpl=new Template({
 	function newOrder(){
 	    $('.page-overlay').show();
 	    $('.page-tips').text('数据提交中，请稍后···');
-	    //var serviceTime=$("#appointTime").val().split('  ');
 	    var address=$('.address-for');
 	    var data = {};
 	    data.customerId=pageParams.userInfo.data.id;
@@ -465,9 +515,9 @@ var step2Tmpl=new Template({
 	    data.baiduMapLng=address.data('lng');
 	    data.baiduMapLat=address.data('lat');
      	data.contactMobile=address.data('phone');
-	    data.orderAgreedTime=pageParams.agreedTime;
-	    if(!!pageParams.hours){
-	    	data.ordernum=pageParams.hours;
+	    data.orderAgreedTime=sessionStorage.agreedTime;
+	    if(!!sessionStorage.ordernum){
+	    	data.ordernum=sessionStorage.ordernum;
 	    }
 	    if(pageParams.type=='window' || pageParams.type=='wasteland'){
 	    	data.ordernum=$('.floor-space').val();
@@ -488,18 +538,8 @@ var step2Tmpl=new Template({
         var url=Apis.saveOrderform;
         if(pageParams.type=='monthly'){
         	url=Apis.saveCycleOrderform;
-        	data.weeknum=$('#weeks .nums').text();
-            var weekdays='';
-            $('.fill-week>div').each(function(){
-                var me=$(this);
-                if(me.hasClass('fill-current')){
-                    weekdays+=me.data('weeknum')+',';
-                }
-            })
-            if(weekdays!=''){
-                weekdays=weekdays.substring(0,weekdays.length-1);
-                data.weekdays=weekdays;
-            }
+        	data.weeknum=sessionStorage.weeknum;
+            data.weekdays=sessionStorage.weekdays;
         }
 	    var order=new FetchApi({
 	        urlApi:url,
@@ -507,7 +547,7 @@ var step2Tmpl=new Template({
 	    },function(){
 	        //alert(JSON.stringify(this.records));
 	        if(this.records.code==200){
-	            window.location.href='/wechat/searchAunt.html?orderno='+this.records.data.orderno+'&providers='+pageParams.providers;
+	            window.location.href='searchAunt.html?orderno='+this.records.data.orderno+'&providers='+pageParams.providers;
 	        }else{
 	            toasts.alert(this.records.message);
 	            //toasts.show(this.records.message);
@@ -518,7 +558,7 @@ var step2Tmpl=new Template({
 	function renderMonthTime(){
         var appTmpl=new Template({
             tmplName:require('../templates/monthlyTime.tmpl'),
-            tmplData:{}
+            tmplData:{data:sessionStorage.agreedTime}
         });
 		$('.page-4').html(appTmpl.getHtml());
 		bindMonthEvents();
@@ -588,6 +628,8 @@ var step2Tmpl=new Template({
 			                })
                 		}	
                 		pageParams.monthDays=monthDays;
+                		sessionStorage.monthDays=JSON.stringify(monthDays);
+                		sessionStorage.selectedDay=pageParams.selectedDay;
 		            	main();
 						showPage('.page-1');
 					},500);
@@ -595,16 +637,70 @@ var step2Tmpl=new Template({
     		}
     	})
     }
-    function setRemark(){
-    	pageParams.orderRemark=$('.order-remark').val();
+    function setSession(){
+    	var orderSeesion={};
+    	orderSeesion.currentStep=pageParams.currentStep;
+    	orderSeesion.agreedTime=$('#appointTime').val();
+    	pageParams.appointTime.data=orderSeesion.agreedTime;
+    	orderSeesion.orderRemark=$('.order-remark').val();
+    	//pageParams.orderRemark=$('.order-remark').val();
         pageParams.requireItemsSl=[];
-        pageParams.floorSpace=$('.floor-space').val();
         $('.require-item').each(function(){
         	if($(this).hasClass('require-current')){
         		pageParams.requireItemsSl.push($(this).text());
         	}else{
         		pageParams.requireItemsSl.push('');
         	}
+        })
+        orderSeesion.floorSpace=$('.floor-space').val();
+        orderSeesion.requireItemsSl= pageParams.requireItemsSl;
+        sessionStorage.orderSeesion=JSON.stringify(orderSeesion);
+    }
+    function getSession(){
+    	if(!!sessionStorage.orderSeesion){
+    		var orderSeesion=JSON.parse(sessionStorage.orderSeesion);
+	    	pageParams.currentStep=orderSeesion.currentStep;
+	    	pageParams.appointTime.data=orderSeesion.agreedTime;
+	    	pageParams.orderRemark=orderSeesion.orderRemark;
+	    	pageParams.requireItemsSl=orderSeesion.requireItemsSl;
+	    	pageParams.floorSpace=orderSeesion.floorSpace;
+	    	if(sessionStorage.myAuntOrder){
+		    	pageParams.myAunt=JSON.parse(sessionStorage.myAuntOrder);
+		    	pageParams.providers=sessionStorage.providersOrder;
+		    }
+	    	if(!!orderSeesion.agreedTime){
+	    		pageParams.stepEnd=1;
+	    	}
+	    }
+	    if(!!sessionStorage.monthDays){
+	    	pageParams.selectedDay=sessionStorage.selectedDay;
+	    	pageParams.monthDays=JSON.parse(sessionStorage.monthDays);
+	    }
+	    //console.log(sessionStorage);
+    }
+    //再来一单功能
+    function renderOrderAgain(){
+        var data = {};
+        data.orderno=pageParams.orderno;
+        var orderInfo=new FetchApi({
+            urlApi:Apis.queryOrderInfo,
+            postData:data
+        },function(){
+            if(this.records.code==200){
+                //alert(JSON.stringify(this.records));
+                var res=this.records.data;
+                var aunt=[{'icon':util.urlParam('icon'),'name':decodeURI(util.urlParam('jjname'))}];
+                pageParams.address.phone=res.mobile;
+				pageParams.address.area=res.addressArea;
+				pageParams.address.door=res.addressHouse;
+				pageParams.address.lng=res.baiduMapLng;
+				pageParams.address.lat=res.baiduMapLat;
+				pageParams.address.linkman=res.linkman;
+				pageParams.myAunt=aunt;
+		    	pageParams.providers=res.providerId;
+            }else{
+                toasts.alert(this.records.message);
+            }
         })
     }
 })(jQuery);

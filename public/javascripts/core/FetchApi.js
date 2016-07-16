@@ -18,9 +18,19 @@ function _init(){
 		dataType:'json',
 		data:me.postData,
 		success:function(res){
-			me.records=res;
-			if(me.callback)
-				me.callback();
+			console.log(res);
+			if(res.code==1508){
+            	toasts.alert('请先注册',function(){
+	                window.location.href='login.html';
+	            })
+            }else if(res.code==1011){
+				sessionStorage.removeItem('userInfo');
+				window.location.href=window.location;
+			}else{
+				me.records=res;
+				if(me.callback)
+					me.callback();
+			}
 		},
 		error:function(ex){
 			toasts.alert(me.urlApi+' failed '+ex);

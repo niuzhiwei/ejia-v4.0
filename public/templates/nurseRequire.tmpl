@@ -1,4 +1,4 @@
-<div class='scroll-view'>
+<div class='page-content'>
 	<ul>
 	<%for(var i=0;i<data.length;i++){%>
 		<div class='chip <%=data[i].radioorcheck===1?"multi":"single"%>' data-notnull='<%=data[i].notnull%>'>
@@ -22,6 +22,6 @@
 	<%}%>
 	</ul>
 </div>
-<div class='fixed-btn'>
+<div class='page-nav'>
 	<button class='require-conform'>确定</button>
 </div>

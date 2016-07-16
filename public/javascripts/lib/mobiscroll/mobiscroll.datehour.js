@@ -203,7 +203,12 @@
                     }*/
                     var B = N.getFullYear();
                     var G = N.getMonth() + 1;
-                    var K = N.getDate();
+                    var K;
+                    if(x.rowtype==3){
+                        K = N.getDate()+1;//新居开荒提前1天
+                    }else{
+                        K = N.getDate();
+                    }
                     G = G <= 9 ? "0" + G : G;
                     K = K <= 9 ? "0" + K : K;
                     s = s <= 9 ? "0" + s : s;

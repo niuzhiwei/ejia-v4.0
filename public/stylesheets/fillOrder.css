@@ -1,23 +1,8 @@
 body{
 	font-size:1.4rem;
 }
-.page-nav {
-	padding: 1rem;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background: #fff;
-}
-.page-content {
-	position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 7rem;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-}
 .page-4{
-	z-index:-1;
+	display:none;
 }
 input {
 	width:100%;
@@ -251,6 +236,48 @@ input {
 	background:#ff6733;
 	color:#fff;
 }
+.myAunt-tab {
+	background:#fff;
+}
+.tab-border {
+	border-right:1px solid #b5b5b5;
+}
+.myAunt-tab > div {
+	margin:0;
+	padding:0.5rem 0;
+	width:auto;
+	border-bottom:2px solid #b5b5b5;
+}
+.myAunt-tab p {
+	height: 2rem;
+    line-height: 2rem;
+}
+.myAunt-tab-current {
+	color:#ff6733;
+	border-bottom:2px solid #ff6733 !important;
+}
+.aunt-star {
+	color:#ff6733;
+	margin-left:-5px;
+}
+.aunt-level i:first-child {
+	margin-left:5px;
+}
+.user-address {
+	margin-left:1rem;
+}
+.aunt-icon {
+	position:relative;
+}
+.top-flag {
+	position: absolute;
+    width: 2.5rem !important;
+    height: auto !important;
+    bottom: 3px;
+}
+.myAunt-check {
+	width:3rem;
+}
 /**时间插件**/
 .android-ics .dwv{
 	border-bottom:2px solid #ff6733;
@@ -295,6 +322,14 @@ input {
 }
 .icon-checked:before { content: "\e661"; color:#ff6733;}
 .icon-check:before { content: "\e660"; color:#ff6733;}
+.user-address {
+	margin-left: 1rem;
+    display: inline-block;
+    width: 10rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /**monthly time**/
 .fill-week {
 	background:#fff;

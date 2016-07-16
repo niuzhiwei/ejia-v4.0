@@ -1,0 +1,66 @@
+<div class='banner flex-box'>
+	<div class='aunt-icon'>
+		<img src='<%=data.icon%>'/>
+	</div>
+	<div class='base-info'>
+		<p><span class='aunt-name'><%=data.realname%></span><span class='aunt-times'>已服务：<%=data.ordercount%>次</span></p>
+		<p><span>年龄：<%=data.age%>岁</span><span class='user-address'><%=data.useraddress%></span></p>
+		<p>身份证：<%=data.idcard%></p>
+		<p>所属家政：<%=data.commercialname%></p>
+	</div>
+</div>
+<div class='content'>
+	<div class='title'>
+		| 经验特长
+	</div>
+	<div class='items'>
+		<%if(data1.undergo){%>
+			<div>
+				<span class='item-title'>工作经历</span>
+				<span class='item-des'><%=data1.undergo%></span>
+			</div>
+		<%}%>
+		<%if(data1.skill){%>
+			<div>
+				<span class='item-title'>擅长技能</span>
+				<span class='item-des'><%=data1.skill%></span>
+			</div>
+		<%}%>
+		<%if(data1.appraise){%>
+			<div>
+				<span class='item-title'>自我评价</span>
+				<span class='item-des'><%=data1.appraise%></span>
+			</div>
+		<%}%>
+		<%if(data1.certificateList.length>0){%>
+			<div>
+				<span class='item-title'>证书展示</span>
+				<%for(var i=0;i<data1.certificateList.length;i++){%>
+					<img src='<%=data1.certificateList[i].imgurl%>'/>
+				<%}%>
+			</div>
+		<%}%>
+	</div>
+</div>
+<div class='content'>
+	<div class='title'>
+		| 用户评价
+	</div>
+	<div class='comment-tab flex-box'>
+		<div data-type='good'><span><%=comments.good%></span><p>好评</p></div>
+		<div data-type='secondary' class='center-tab'><span><%=comments.secondary%></span><p>中评</p></div>
+		<div data-type='bad'><span><%=comments.bad%></span><p>差评</p></div>
+	</div>
+</div>
+<div class='fixed-btn'>
+	<div class='flex-box'>
+		<div class='go-back'>
+			<button>返回</button>
+		</div>
+		<%if(orderno){%>
+			<div class='select-aunt'>
+				<button>选择TA</button>
+			</div>
+		<%}%>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+body {
+	font-size:1.4rem;
+	background:#ebebeb;
+}
+.my-aunt {
+	margin-top:5rem;
+}
+.my-aunt,.other-aunt {
+	background:#fff;
+}
+.other-aunt {
+	margin-top:1rem;
+}
+.aunt-icon {
+	width:5rem;
+	height:5rem;
+	border-radius:50%;
+	position:absolute;
+	left:-2.5rem;
+}
+.auntList-tips {
+	padding:1rem;
+	border-bottom:1px solid #ebebeb;
+	color:rgb(103,103,103);
+}
+.aunt-item {
+	padding:1rem 1.5rem 1rem 4rem;
+}
+.aunt-info {
+	border:1px solid #b5b5b5;
+	border-radius:5px;
+	position:relative;
+	padding:0.5rem 1rem 0.5rem 4rem;
+	line-height: 1.8rem;
+}
+.aunt-name {
+	font-size:1.6rem;
+	font-weight:bold;
+}
+.user-address {
+	margin-left:4rem;
+}
+.auntList-tips {
+	display:none;
+}
+.solar {
+	margin-top:250px;
+}

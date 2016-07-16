@@ -1,0 +1,86 @@
+body {
+	font-size:1.4rem;
+	background:#ebebeb;
+}
+.list {
+	top:4.2rem;
+}
+.table {
+	background:#fff;
+}
+.myAunt-tab {
+	background:#fff;
+}
+.tab-border {
+	border-right:1px solid #b5b5b5;
+}
+.myAunt-tab > div {
+	margin:0;
+	padding:0.5rem 0;
+	width:auto;
+	border-bottom:2px solid #b5b5b5;
+}
+.myAunt-tab p {
+	height: 3rem;
+    line-height: 3rem;
+}
+.myAunt-tab-current {
+	color:#ff6733;
+	border-bottom:2px solid #ff6733 !important;
+}
+.aunt-star {
+	color:#ff6733;
+	margin-left:-5px;
+}
+.aunt-level i:first-child {
+	margin-left:5px;
+}
+.user-address {
+	margin-left:1rem;
+}
+.aunt-icon {
+	position:relative;
+}
+.top-flag {
+	position: absolute;
+    width: 2.5rem !important;
+    height: auto !important;
+    bottom: 3px;
+}
+.myAunt-check {
+	width:3rem;
+}
+.aunt-item > div {
+	padding-top:1rem;
+	padding-bottom:1rem;
+	border-bottom:1px solid #b5b5b5;
+}
+.aunt-item p {
+	margin-top:5px;
+}
+.aunt-icon {
+	padding-left: 1rem;
+	width:8rem;
+}
+.aunt-icon img {
+	width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+}
+.aunt-level {
+	margin-top:5px;
+}
+.aunt-level img {
+	width:1.4rem;
+	float:left;
+}
+.icon-checked:before { content: "\e661"; color:#ff6733;}
+.icon-check:before { content: "\e660"; color:#ff6733;}
+.user-address {
+	margin-left: 1rem;
+    display: inline-block;
+    width: 10rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

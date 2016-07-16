@@ -1,0 +1,81 @@
+<div class="title loading-text">
+	<div class="title-loading">
+		<div></div>
+	</div>
+	<div class="aunt-list-title"><%=title%></div>
+</div>
+<%if(data.length===0){%>
+	<div class="solar">
+        <i class="mercury"></i>
+        <i class="venus"></i>
+        <i class="earth"></i>
+        <i class="mars"></i>
+        <i class="belt"></i>
+        <i class="jupiter"></i>
+        <i class="saturn"></i>
+        <i class="uranus"></i>
+        <i class="neptune"></i>
+    </div>
+<%}%>
+<div class='my-aunt'>
+	<%
+		var flag=false;
+		for(var i=0;i<data.length;i++){
+			if(data[i].isSelect==1){
+				flag=true;
+			}
+		}
+	%>
+	<%if(flag){%>
+		<div class="auntList-tips">您指定的手艺人</div>
+	<%}else{%>
+		<div class="auntList-tips">指定手艺人尚未参与抢单</div>
+	<%}%>
+	<div class="myAunt-box">
+		<%for(var i=0;i<data.length;i++){%>
+			<%if(data[i].isSelect==1){%>
+				<div class="aunt-item" data-userid="<%=data[i].providerId%>" data-price="<%=data[i].price%>" data-commercialid="<%=data[i].commercialid%>">
+					<div class='aunt-info'>
+						<img src='<%=data[i].icon%>' class='aunt-icon'/>
+						<p>
+							<span class="aunt-name"><%=data[i].realname%></span>
+							<span class="aunt-level">
+								<i class="iconfont aunt-star">&#xe676;</i>
+							</span>
+						</p>
+						<p>
+							<span>年龄：<%=data[i].age%>岁</span>
+							<span class='user-address'>籍贯：<%=data[i].useraddress%></span>
+						</p>
+						<p><span>已服务：<%=data[i].ordercount%>次</span></p>
+					</div>
+				</div>
+			<%}%>
+		<%}%>
+	</div>
+</div>
+<div class='other-aunt'>
+	<div class="auntList-tips">我们还为您推荐以下手艺人</div>
+	<div class="otherAunt-box">
+		<%for(var i=0;i<data.length;i++){%>
+			<%if(data[i].isSelect!=1){%>
+				<div class="aunt-item" data-userid="<%=data[i].providerId%>" data-price="<%=data[i].price%>" data-commercialid="<%=data[i].commercialid%>">
+					<div class='aunt-info'>
+						<img src='<%=data[i].icon%>' class='aunt-icon'/>
+						<p>
+							<span class="aunt-name"><%=data[i].realname%></span>
+							<span class="aunt-level">
+								<i class="iconfont aunt-star">&#xe676;</i>
+							</span>
+						</p>
+						<p>
+							<span>年龄：<%=data[i].age%>岁</span>
+							<span class='user-address'>籍贯：<%=data[i].useraddress%></span>
+						</p>
+						<p><span>已服务：<%=data[i].ordercount%>次</span></p>
+					</div>
+				</div>
+			<%}%>
+		<%}%>
+	</div>
+</div>

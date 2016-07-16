@@ -16,6 +16,6 @@ function main(){
 }
 function bindEvents(){
 	$('.fixed-btn button').click(function(event) {
-		window.location.href='fillFotile.html?type=washer';
+		window.location.href='fillFotile.html?type=washer&serviceclass=0001000300040002';
 	});
 }

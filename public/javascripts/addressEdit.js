@@ -143,7 +143,7 @@ function bindEvents(){
 		    		if(!!pageParams.id && pageParams.id!='null'){
 		    			msg='修改地址成功！';
 		    		}
-		        	toasts.alert(msg,function(){
+		        	toasts.alert(msg,function(){		        		
 		        		if(pageParams.back=='dailys'){
 		        			window.location.href='address.html?back=dailys&type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
 		        		}else if(pageParams.back=='fotiles'){

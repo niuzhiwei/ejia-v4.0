@@ -145,7 +145,7 @@ function _register(phone,code){
                 if(document.referrer){
                     window.location.href = document.referrer;
                 }else{
-                    window.location.href = 'index.html';
+                    window.location.href = 'home.html';
                 }
             });
         }else{

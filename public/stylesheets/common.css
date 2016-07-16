@@ -42,7 +42,22 @@ body {
 	min-height: 100%;
 }
 .page-2,.page-3 {
-	z-index:-1;
+	display:none;
+}
+.page-nav {
+	padding: 1rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: #fff;
+}
+.page-content {
+	position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 7rem;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
 }
 img {
 	display:block;
@@ -165,7 +180,7 @@ a.btn{
     height: 100%;
     background: rgba(0,0,0,0.6);
     display: none;
-    z-index: 100;
+    z-index: 1;
 }
 .page-tips{
 	width: 20rem;
@@ -173,7 +188,7 @@ a.btn{
     position: absolute;
     margin-top: -5rem;
     margin-left: -10rem;
-    z-index: 100;
+    z-index: 1;
     top: 50%;
     left: 50%;
     color: #fff;

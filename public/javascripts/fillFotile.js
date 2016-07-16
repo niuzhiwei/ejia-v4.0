@@ -18,12 +18,13 @@ var Apis={
 	delAddress:'/removte/user/deleteUseraddress',
 	editUseraddress:'/removte/user/editUseraddress',
 	getMyProviders:'/removte/provider/getMyProviders',
-	saveOrderform:'/removte/order/saveOrderform'
+	saveOrderform:'/removte/order/saveOrderform',
+	providerTop:'/removte/provider/providerTop'
 };
 
 var pageParams={
 	type:util.urlParam('type'),
-	serviceclass:'',
+	serviceclass:util.urlParam('serviceclass'),
 	currentStep:1,
 	stepEnd:0,
 	address:{data:{},type:0},
@@ -110,8 +111,9 @@ var step3Tmpl=new Template({
 				pageParams.currentStep=2;
 			}
 		}
+		getSession();
 		renderAddressList();
-		renderMyAunt();
+		//renderMyAunt('recently');
 		renderFotile();
 		bindEvents();
 	}
@@ -132,6 +134,9 @@ var step3Tmpl=new Template({
 			//$('.page-2').html(step1Tmpl2.getHtml());
 		}
 		$('.page-1 .steps').html(tmpl);
+		if(pageParams.stepEnd){
+			$('.next-step').text('提交订单');
+		}
 		if(pageParams.currentStep==3){
 			var dateScroll = function(){
 			    var date = new Date();
@@ -198,16 +203,14 @@ var step3Tmpl=new Template({
 			}
 		})
 		$('.page-1 .table').on('click','.address-for',function(){
-			setRemark();
+			setSession();
 			setTimeout(function(){
 				showPage('.page-2');
 			},500);
 		})
 		$('.page-1 .table').on('click','.hot-aunt',function(){
-			setRemark();
-			setTimeout(function(){
-				showPage('.page-3');
-			},500);
+			setSession();
+			window.location.href='myAunt.html?type='+pageParams.type+'&serviceclass='+pageParams.serviceclass;
 		})
 		$('.page-1 .table').on('click','.require-item',function(){
 			var $item=$(this);
@@ -219,7 +222,7 @@ var step3Tmpl=new Template({
 		})
 		//家电类型
 		$('.page-1 .table').on('click','.fotile-type',function(){
-			setRemark();
+			setSession();
 			setTimeout(function(){
 				showPage('.page-4');
 			},500);
@@ -255,8 +258,8 @@ var step3Tmpl=new Template({
 		})
 	}
 	function showPage(pageCurrent){
-		$('.page').css({'z-index':-1});
-		$(pageCurrent).css({'z-index':1});
+		$('.page').hide();
+		$(pageCurrent).show();
 	}
 	function renderAddressList(){
 		var userInfo=new FetchApi({
@@ -359,25 +362,34 @@ var step3Tmpl=new Template({
 		})
 	}
 	 //指定手艺人
-	function renderMyAunt(){
+	function renderMyAunt(type){
         var data = {};
         data.userid=pageParams.userInfo.data.id;
         data.serviceclass=pageParams.serviceclass;
+     	var url;
+        if(type=='recently'){
+        	url=Apis.getMyProviders;
+        }else if(type=='hotly'){
+        	url=Apis.providerTop;
+        	data.flag=0;
+        }
         var address=new FetchApi({
-            urlApi:Apis.getMyProviders,
+            urlApi:url,
             postData:data
         },function(){
             if(this.records.code==200){
                 //alert(JSON.stringify(this.records));
                 var me=this;
                 if(this.records.data.length==0){
-                    toasts.show('暂无符合的手艺人');  
+                    //toasts.show('暂无符合的手艺人');  
                 }else{
                  	var appTmpl=new Template({
 			            tmplName:require('../templates/myAunt.tmpl'),
 			            tmplData:me.records
 			        });
         			$('.page-3').html(appTmpl.getHtml());
+        			$('.page-3').html(appTmpl.getHtml());
+        			$('.'+type).addClass('myAunt-tab-current');
         			bindAuntEvents();
                 }
             }else{
@@ -388,7 +400,11 @@ var step3Tmpl=new Template({
     }
     function bindAuntEvents(){
     	$('.aunt-item').click(function(){
-    		var $check=$(this).find('div.iconfont');
+    		var userid=$(this).data('userid');
+    		window.location.href='auntDetail.html?userid='+userid;
+    	})
+    	$('.myAunt-check').click(function(e){
+    		var $check=$(this);
     		if($check.hasClass('icon-check')){
     			$check.addClass('icon-checked');
     			$check.removeClass('icon-check');
@@ -396,6 +412,7 @@ var step3Tmpl=new Template({
     			$check.addClass('icon-check');
     			$check.removeClass('icon-checked');
     		}
+    		e.stopPropagation();
     	})
     	$('.myAunt-btn').click(function(){
 		 	pageParams.myAunt=[];
@@ -419,6 +436,12 @@ var step3Tmpl=new Template({
             	main();
 				showPage('.page-1');
 			},500);
+    	})
+    	$('.myAunt-tab > div').click(function(){
+    		var type=$(this).data('type');
+    		if(!$(this).hasClass('myAunt-tab-current')){
+    			renderMyAunt(type);
+    		}
     	})
     }
     function readSession(){
@@ -463,7 +486,7 @@ var step3Tmpl=new Template({
 	    },function(){
 	        //alert(JSON.stringify(this.records));
 	        if(this.records.code==200){
-	            window.location.href='/wechat/searchAunt.html?orderno='+this.records.data.orderno+'&providers='+pageParams.providers;
+	            window.location.href='searchAunt.html?orderno='+this.records.data.orderno+'&providers='+pageParams.providers;
 	        }else{
 	            toasts.alert(this.records.message);
 	            //toasts.show(this.records.message);
@@ -472,7 +495,7 @@ var step3Tmpl=new Template({
 	    });
 	}
 	function renderFotile(){
-		console.log(typeMap(pageParams.type));
+		//console.log(typeMap(pageParams.type));
         var appTmpl=new Template({
             tmplName:require('../templates/fotileType.tmpl'),
             tmplData:{data:typeMap(pageParams.type)}
@@ -504,8 +527,36 @@ var step3Tmpl=new Template({
     		}
     	})
     }
- 	function setRemark(){
-    	pageParams.orderRemark=$('.order-remark').val();
+    function setSession(){
+    	var fotileSeesion={};
+    	fotileSeesion.currentStep=pageParams.currentStep;
+    	fotileSeesion.agreedTime=$('#appointTime').val();
+    	pageParams.appointTime.data=fotileSeesion.agreedTime;
+    	fotileSeesion.orderRemark=$('.order-remark').val();
+    	fotileSeesion.typeList=pageParams.typeList;
+        sessionStorage.fotileSeesion=JSON.stringify(fotileSeesion);
+        sessionStorage.fotileType=pageParams.type;
+    }
+    function getSession(){
+    	if(sessionStorage.fotileType){
+    		if(sessionStorage.fotileType!=pageParams.type){
+    			sessionStorage.removeItem('fotileSeesion');
+    		}
+    	}
+    	if(!!sessionStorage.fotileSeesion){
+    		var fotileSeesion=JSON.parse(sessionStorage.fotileSeesion);
+	    	pageParams.currentStep=fotileSeesion.currentStep;
+	    	pageParams.appointTime.data=fotileSeesion.agreedTime;
+	    	pageParams.orderRemark=fotileSeesion.orderRemark;
+	    	if(sessionStorage.myAuntFotile){
+	    		pageParams.myAunt=JSON.parse(sessionStorage.myAuntFotile);
+		    	pageParams.providers=sessionStorage.providersFotile;
+		    }
+	    	pageParams.typeList=fotileSeesion.typeList;
+	    	if(!!fotileSeesion.agreedTime){
+	    		pageParams.stepEnd=1;
+	    	}
+	    }
     }
 })(jQuery);
 

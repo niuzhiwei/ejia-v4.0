@@ -1,0 +1,50 @@
+<div class='page-content'>
+	<div class='myAunt-tab flex-box'>
+		<div class='recently' data-type='recently'><p class='tab-border'>最近服务</p></div>
+		<div class='hotly' data-type='hotly'><p>热门人选</p></div>
+	</div>
+	<div class='table'>
+		<%for(var i=0;i<data.length;i++){%>
+			<div class="row aunt-item" data-userid='<%=data[i].userid%>'>
+				<div class="aunt-icon">
+					<%if(!!data[i].icon){%>
+						<img src="http://shangjia.exiangjia.com/<%=data[i].icon%>"/>
+					<%}else{%>
+						<img src="/images/wx/aunt_logo.png"/>
+					<%}%>
+					<%if(i==0){%>
+						<img src='../images/aunt/top1.png' class='top-flag'/>
+					<%}else if(i==1){%>
+						<img src='../images/aunt/top2.png' class='top-flag'/>
+					<%}else if(i==2){%>
+						<img src='../images/aunt/top3.png' class='top-flag'/>
+					<%}%>
+				</div>
+				<div class="aunt-info-base">
+					<p>
+						<span><%=data[i].realname%></span>
+						<span class="aunt-level">
+							<%if(data[i].startlevel){%>
+								<%for(var j=0;j<data[i].startlevel;j++){%><!--不能用i循环了..-->
+									<i class="iconfont aunt-star">&#xe676;</i>
+								<%}%>
+							<%}else{%>
+								<i class="iconfont aunt-star">&#xe676;</i>
+							<%}%>
+						</span>
+					</p>
+					<p>
+						<span>年龄：<%=data[i].age%>岁</span>
+						<span class='user-address'>籍贯：<%=data[i].useraddress%></span>
+					</p>
+					<p><span>已服务：<%=data[i].ordercount%>次</span></p>
+				</div>
+				<div class="iconfont icon-check if-2x myAunt-check" data-userid="<%=data[i].userid%>" data-name="<%=data[i].realname%>" data-icon="<%=data[i].icon%>">
+				</div>
+			</div>
+		<%}%>
+	</div>
+</div>
+<div class='page-nav'>
+	<button type="button" class="myAunt-btn">确定</button>
+</div>

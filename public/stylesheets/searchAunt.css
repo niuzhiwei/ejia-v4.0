@@ -1,0 +1,236 @@
+/*search-aunt-page*/
+.component {
+	position: relative;
+	z-index: 1;
+	width: 300px;
+	margin: 0 auto;
+}
+.button {
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+	width: 100px;
+	height: 100px;
+	border: none;
+	background: none;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.button:hover,
+.button:focus {
+	outline: none;
+	color: #048abd;
+}
+
+.button--listen {
+	pointer-events: none;
+}
+
+.button--hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.button__content {
+	position: absolute;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+
+.button__content--listen {
+	bottom: 0;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin: -50px 0 0 -50px;
+	border-radius: 50%;
+	-webkit-transform: translate3d(0, 25px, 0);
+	transform: translate3d(0, 25px, 0);
+
+}
+
+.button__content--listen::before,
+.button__content--listen::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	opacity: 0;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+}
+
+.button--animate .button__content--listen::before {
+	-webkit-animation: anim-ripple 1s ease-out infinite forwards;
+	animation: anim-ripple 1s ease-out infinite forwards;
+}
+
+.button--animate .button__content--listen::after {
+	-webkit-animation-delay: 0.5s;
+	animation-delay: 0.5s;
+}
+
+@-webkit-keyframes anim-ripple {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(1, 1);
+		transform: scale(1, 1);
+	}
+	25% {
+		opacity: 1;
+		-webkit-transform: scale(2, 2);
+		transform: scale(2, 2);
+	}
+	50% {
+		opacity: 1;
+		-webkit-transform: scale(4, 4);
+		transform: scale(4, 4);
+	}
+	75% {
+		opacity: 1;
+		-webkit-transform: scale(5, 5);
+		transform: scale(5, 5);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(6, 6);
+		transform: scale(6, 6);
+	}
+}
+
+@keyframes anim-ripple {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(1, 1);
+		transform: scale(1, 1);
+	}
+	25% {
+		opacity: 1;
+		-webkit-transform: scale(2, 2);
+		transform: scale(2, 2);
+	}
+	50% {
+		opacity: 1;
+		-webkit-transform: scale(4, 4);
+		transform: scale(4, 4);
+	}
+	75% {
+		opacity: 1;
+		-webkit-transform: scale(5, 5);
+		transform: scale(5, 5);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(6, 6);
+		transform: scale(6, 6);
+	}
+}
+
+.button--start .button__content--start,
+.button--listen .button__content--listen {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.notes {
+	position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    width: 100px;
+    height: 60px;
+    margin: 0 0 0 -50px;
+}
+
+.note {
+	position: absolute;
+	left: 50%;
+	width: 50px;
+	margin-left: -25px;
+	margin-top: -25px;
+	opacity: 0;
+	color: rgba(255, 255, 255, 0.75);
+}
+.user-icon {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+.aunt-icon {
+	border-radius: 50%;
+}
+.circle {
+	position: absolute;
+    width: 700px;
+    height: 700px;
+    left: 50%;
+    top: 50%;
+    margin-left: -350px;
+    margin-top: -350px;
+}
+.circle .circle-a {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url("../images/m-22.png");
+	opacity: 0;
+	filter: alpha(opacity=0)\9;
+	animation: ani-circle-a 4.5s ease-out forwards infinite;
+	-webkit-animation: ani-circle-a 4.5s ease-out forwards infinite
+}
+
+.circle .circle-b {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url("../images/m-22.png");
+	opacity: 0;
+	filter: alpha(opacity=0)\9;
+	animation: ani-circle-a 4.5s ease-out 1.5s forwards infinite;
+	-webkit-animation: ani-circle-a 4.5s ease-out 1.5s forwards infinite
+}
+
+.circle .circle-c {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url("../images/m-22.png");
+	opacity: 0;
+	filter: alpha(opacity=0)\9;
+	animation: ani-circle-a 4.5s ease-out 3s forwards infinite;
+	-webkit-animation: ani-circle-a 4.5s ease-out 3s forwards infinite
+}
+@-webkit-keyframes ani-circle-a {
+	0% {
+		-webkit-transform: scale(0);
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	50% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+
+	100% {
+		-webkit-transform: scale(3.5);
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+}

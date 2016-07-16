@@ -47,7 +47,7 @@ function renderAddressList(){
 				tmplName:require('../templates/addressSelect.tmpl'),
 				tmplData:data
 			});
-        	$('.container').html(tmpl.getHtml());
+        	$('.page .page-content').html(tmpl.getHtml());
         	//showPage('.page-2');
         	//window.location.href=''
         }else{
