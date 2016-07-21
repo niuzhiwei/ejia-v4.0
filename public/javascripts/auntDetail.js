@@ -125,6 +125,8 @@ function renderComment(){
 }
 function bindEvents(){
     $('.container').on('click','.comment-tab>div',function(){
+        pageParams.pageNo=1;
+        pageParams.nextPageFlag=true;
         var type=$(this).data('type');
         pageParams.commentType=type;
         renderComment();
