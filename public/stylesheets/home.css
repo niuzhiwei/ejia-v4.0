@@ -1,5 +1,5 @@
 body {
-	font-size:1.4rem;
+	font-size:1.2rem;
 	background:#ebebeb;
 	padding-bottom:5rem;
 }
@@ -46,11 +46,11 @@ body {
 }
 .top-title {
     margin-bottom: 2px;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
 }
 .top-des {
-	font-size:1.4rem;
+	font-size:1.2rem;
 	color:#5d5d5d;
 }
 .hot-icon {
@@ -126,7 +126,7 @@ body {
 	font-weight: normal;
 }
 .list-item {
-	padding: 0.5rem 1.5rem;
+	padding: 1rem 1.5rem;
     line-height: 2rem;
     border-bottom:1px solid #ebebeb;
 }
@@ -146,4 +146,30 @@ body {
 }
 .swiper-pagination-bullet-active{
 	background:#ff6733;
+}
+.news-item {
+	font-size:1.4rem;
+}
+.news-item span {
+	vertical-align:middle;
+}
+.newstype {
+	color:#ea1e3b;
+	font-size:1rem;
+	margin-right:2px;
+	margin-top:1px;
+	margin-bottom:1px;
+}
+.thinner-border {
+    position: relative;
+}
+.thinner-border:before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ea1e3b;
+    border-radius:4px;
+    -webkit-transform-origin: 0 25%;
+    -webkit-transform: scale(0.5, 0.5);
 }

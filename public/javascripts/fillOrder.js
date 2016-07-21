@@ -213,7 +213,16 @@ var step2Tmpl=new Template({
 	function bindEvents(){
 		$('.next-step').click(function(){	
 			if(pageParams.stepEnd){
-				newOrder();
+				if(pageParams.type=='window' || pageParams.type=='wasteland'){
+					var area=$('.floor-space').val();
+					if(area==''){
+						toasts.show('请填写房屋面积');
+					}else{
+						newOrder();
+					}
+				}else{
+					newOrder();
+				}
 			}else{
 				var flag=true;
 				$('.page-1 label').each(function(index, el) {
@@ -519,7 +528,9 @@ var step2Tmpl=new Template({
 	    if(!!sessionStorage.ordernum){
 	    	data.ordernum=sessionStorage.ordernum;
 	    }
-	    if(pageParams.type=='window' || pageParams.type=='wasteland'){
+	    if(pageParams.type=='window'){
+	    	data.ordernum=$('.floor-space').val()*0.1;
+	    }else if(pageParams.type=='wasteland'){
 	    	data.ordernum=$('.floor-space').val();
 	    }
 	    data.serviceclass=pageParams.serviceclass;
@@ -597,7 +608,7 @@ var step2Tmpl=new Template({
                 }else{
                 	var begtime=$('#appointTime').val().split('  ')[0];
                 	var begtimeHour=begtime.split(' ')[1];
-                	var endtime=util.getDate(begtime).getTime()+2*60*60*1000;
+                	var endtime=util.getDate(begtime).getTime()+pageParams.hours*60*60*1000;
                 	var endtimeHour=util.formatDate('yyyy-MM-dd hh:mm',endtime).split(' ')[1];
                 	setTimeout(function(){
                 		//周期内所选的具体日期
@@ -655,8 +666,14 @@ var step2Tmpl=new Template({
         orderSeesion.floorSpace=$('.floor-space').val();
         orderSeesion.requireItemsSl= pageParams.requireItemsSl;
         sessionStorage.orderSeesion=JSON.stringify(orderSeesion);
+        sessionStorage.orderType=pageParams.type;
     }
     function getSession(){
+    	if(sessionStorage.orderType){
+    		if(sessionStorage.orderType!=pageParams.type){
+    			sessionStorage.removeItem('orderSeesion');
+    		}
+    	}
     	if(!!sessionStorage.orderSeesion){
     		var orderSeesion=JSON.parse(sessionStorage.orderSeesion);
 	    	pageParams.currentStep=orderSeesion.currentStep;

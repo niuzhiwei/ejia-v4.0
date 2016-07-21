@@ -25,7 +25,9 @@ var pageParams={
 	orderno:util.urlParam('orderno'),
 	commercialid:util.urlParam('commercialid'),
     pageNo:1,
-    pageSize:5
+    pageSize:5,
+    nextPageFlag:true,
+    commentType:'good'
 };
 
 var refreshHelper=new RefreshHelper({
@@ -37,10 +39,11 @@ var refreshHelper=new RefreshHelper({
 main();
 
 function main(){
-	renderView('good');
+	renderView();
     renderComment();
+    bindEvents();
 }
-function renderView(type){
+function renderView(){
 	var data={};
 	data.userid=pageParams.userid;
 	var auntDetail=new FetchApi({
@@ -50,35 +53,30 @@ function renderView(type){
         //alert(JSON.stringify(this.records));
         if(this.records.code==200){
         	var comments={good:0,secondary:0,bad:0,list:[]};
-        	var goodlist=[],secondarylist=[],badlist=[];
+        	//var goodlist=[],secondarylist=[],badlist=[];
         	var me=this.records;
         	for(var i=0;i<me.data2.length;i++){
         		if(me.data2[i].providerJudgeLevel==100){
         			comments.good++;
-        			goodlist.push(me.data2[i]);
+        			//goodlist.push(me.data2[i]);
         		}else if(me.data2[i].providerJudgeLevel==60){
         			comments.secondary++;
-        			secondarylist.push(me.data2[i]);
+        			//secondarylist.push(me.data2[i]);
         		}else if(me.data2[i].providerJudgeLevel==20){
         			comments.bad++;
-        			badlist.push(me.data2[i]);
+        			//badlist.push(me.data2[i]);
         		}
         	}
-        	if(type=='good'){
-        		comments.list=goodlist;
-        	}else if(type=='secondary'){
-        		comments.list=secondarylist;
-        	}else if(type=='bad'){
-        		comments.list=badlist;
-        	}
         	me.comments=comments;
-        	me.orderno=pageParams.orderno;
+        	//me.orderno=pageParams.orderno;
             var pageTmpl=new Template({
 				tmplName:require('../templates/auntDetail.tmpl'),
 				tmplData:me
 			});
 			$('.base-info').html(pageTmpl.getHtml());
-			bindEvents();
+            if(!!pageParams.orderno){
+                $('.select-aunt').show();
+            }
         }else{
             toasts.alert(this.records.message);
         }
@@ -89,6 +87,13 @@ function renderComment(){
     data.providerid=pageParams.userid;
     data.pageNo=pageParams.pageNo;
     data.pageSize=pageParams.pageSize;
+    if(pageParams.commentType=='good'){
+        data.providerJudgeLevel=100;
+    }else if(pageParams.commentType=='secondary'){
+        data.providerJudgeLevel=60;
+    }else if(pageParams.commentType=='bad'){
+        data.providerJudgeLevel=20;
+    }
     var comments=new FetchApi({
         urlApi:Apis.commentList,
         postData:data
@@ -102,14 +107,14 @@ function renderComment(){
                 tmplData:res.data
             });
             if(pageParams.pageNo==1){
-                $('.comment-list ul').html(appTmpl.getHtml());
+                $('.comment-list').html(appTmpl.getHtml());
                 myScroll.refresh();
             }else{
                 if(res.data.list.length==0){
                     pageParams.nextPageFlag=false;
                 }
                 if(pageParams.nextPageFlag){
-                    $('.comment-list ul').append(appTmpl.getHtml());
+                    $('.comment-list').append(appTmpl.getHtml());
                 }
                 myScroll.refresh();//特别重要，一定要在渲染之后refresh，不然会引起滚动条位置不对应的BUG
             }
@@ -119,16 +124,17 @@ function renderComment(){
     });
 }
 function bindEvents(){
+    $('.container').on('click','.comment-tab>div',function(){
+        var type=$(this).data('type');
+        pageParams.commentType=type;
+        renderComment();
+    })
 	$('.go-back').click(function(){
 		if(document.referrer){
             window.location.href = document.referrer;
         }else{
             window.location.href = 'home.html';
         }
-	})
-	$('.comment-tab>div').click(function(){
-		var type=$(this).data('type');
-		renderView(type);
 	})
 	$('.select-aunt').tap(function(){
 		selectAunt(function(){
@@ -150,8 +156,8 @@ function selectAunt(callback){
     },function(){
      	//alert(JSON.stringify(this.records));
         if(this.records.code==200){
-                if(callback)
-                    callback();
+            if(callback)
+                callback();
         }else{
             toasts.alert(this.records.message,function(){
                 window.location.href='/wechat/orderDetail.html?orderno='+pageParams.orderno;

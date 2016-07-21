@@ -1,16 +1,18 @@
-<div class="aunt-item" data-userid="<%=data[i].providerId%>" data-price="<%=data[i].price%>" data-commercialid="<%=data[i].commercialid%>">
+<div class="aunt-item" data-userid="<%=data.providerId%>" data-price="<%=data.price%>" data-commercialid="<%=data.commercialid%>">
 	<div class='aunt-info'>
-		<img src='<%=data[i].icon%>' class='aunt-icon'/>
+		<img src='<%=data.icon%>' class='aunt-icon'/>
 		<p>
-			<span class="aunt-name"><%=data[i].realname%></span>
+			<span class="aunt-name"><%=data.realname%></span>
 			<span class="aunt-level">
-				<i class="iconfont aunt-star">&#xe676;</i>
+				<%for(var j=0;j<data.startlevel;j++){%><!--不能用i循环了..-->
+					<i class="iconfont aunt-star">&#xe676;</i>
+				<%}%>
 			</span>
 		</p>
 		<p>
-			<span>年龄：<%=data[i].age%>岁</span>
-			<span class='user-address'>籍贯：<%=data[i].useraddress%></span>
+			<span>年龄：<%=data.age%>岁</span>
+			<span class='user-address'>籍贯：<%=data.useraddress%></span>
 		</p>
-		<p><span>已服务：<%=data[i].ordercount%>次</span></p>
+		<p><span>已服务：<%=data.ordercount%>次</span></p>
 	</div>
 </div>

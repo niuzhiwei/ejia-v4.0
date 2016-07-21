@@ -3,13 +3,25 @@
 		<img src='<%=data.icon%>'/>
 	</div>
 	<div class='base-info'>
-		<p><span class='aunt-name'><%=data.realname%></span><span class='aunt-times'>已服务：<%=data.ordercount%>次</span></p>
-		<p><span>年龄：<%=data.age%>岁</span><span class='user-address'><%=data.useraddress%></span></p>
+		<p>
+			<span class='aunt-name'><%=data.realname%></span>
+			<span class="aunt-level">
+			<%if(data.startlevel){%>
+				<%for(var j=0;j<data.startlevel;j++){%><!--不能用i循环了..-->
+					<i class="iconfont aunt-star">&#xe676;</i>
+				<%}%>
+			<%}else{%>
+				<i class="iconfont aunt-star">&#xe676;</i>
+			<%}%>
+			</span>
+		</p>
+		<p class='aunt-times'>已服务：<%=data.ordercount%>次</p>
+		<p><span>年龄：<%=data.age%>岁</span><span class='user-address'>籍贯：<%=data.useraddress%></span></p>
 		<p>身份证：<%=data.idcard%></p>
 		<p>所属家政：<%=data.commercialname%></p>
 	</div>
 </div>
-<div class='content'>
+<div class='content content-first'>
 	<div class='title'>
 		| 经验特长
 	</div>
@@ -50,17 +62,5 @@
 		<div data-type='good'><span><%=comments.good%></span><p>好评</p></div>
 		<div data-type='secondary' class='center-tab'><span><%=comments.secondary%></span><p>中评</p></div>
 		<div data-type='bad'><span><%=comments.bad%></span><p>差评</p></div>
-	</div>
-</div>
-<div class='fixed-btn'>
-	<div class='flex-box'>
-		<div class='go-back'>
-			<button>返回</button>
-		</div>
-		<%if(orderno){%>
-			<div class='select-aunt'>
-				<button>选择TA</button>
-			</div>
-		<%}%>
 	</div>
 </div>

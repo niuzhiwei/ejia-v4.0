@@ -87,7 +87,12 @@
 				<div class='news-item' id='tab-2'>
 					<ul>
 					<%for(var i=0;i<news.length;i++){%>
-						<li class='nowrap' data-url='<%=news[i].newurl%>' data-contentid='<%=news[i].contentid%>'><%=news[i].title%></li>
+						<li class='nowrap' data-url='<%=news[i].newurl%>' data-contentid='<%=news[i].contentid%>'>
+							<%if(news[i].newstypename){%>
+								<span class='newstype thinner-border'>&nbsp;<%=news[i].newstypename%>&nbsp;</span>
+							<%}%>
+							<span><%=news[i].title%></span>
+						</li>
 					<%}%>
 					</ul>
 				</div>

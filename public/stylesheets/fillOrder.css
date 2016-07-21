@@ -106,7 +106,7 @@ input {
 	font-size:1.5rem;
 }
 .mod {
-	margin-right:0.5rem;
+	margin-right:1.5rem;
 }
 .del i {
 	margin-right:1px;
@@ -321,7 +321,7 @@ input {
 	float:left;
 }
 .icon-checked:before { content: "\e661"; color:#ff6733;}
-.icon-check:before { content: "\e660"; color:#ff6733;}
+.icon-check:before { content: "\e660"; }
 .user-address {
 	margin-left: 1rem;
     display: inline-block;

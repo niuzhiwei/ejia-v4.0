@@ -516,7 +516,7 @@ var step3Tmpl=new Template({
     				pageParams.typeList.push(item);
     			}
     		})
-    		if(pageParams.serviceclass==''){
+    		if(pageParams.typeList.length==0){
     			toasts.show('请选择家电种类');
     		}else{
 			 	setTimeout(function(){

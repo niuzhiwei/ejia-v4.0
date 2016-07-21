@@ -18,7 +18,7 @@ function _init(){
 		dataType:'json',
 		data:me.postData,
 		success:function(res){
-			console.log(res);
+			//console.log(res);
 			if(res.code==1508){
             	toasts.alert('请先注册',function(){
 	                window.location.href='login.html';

@@ -17,6 +17,7 @@ body {
 	border-radius:50%;
 	position:absolute;
 	left:-2.5rem;
+	top:0.65rem;
 }
 .auntList-tips {
 	padding:1rem;
@@ -45,4 +46,11 @@ body {
 }
 .solar {
 	margin-top:250px;
+}
+.aunt-star {
+	color:#ff6733;
+	margin-left:-5px;
+}
+.aunt-level i:first-child {
+	margin-left:5px;
 }

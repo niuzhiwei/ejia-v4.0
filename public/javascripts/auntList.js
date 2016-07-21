@@ -38,6 +38,15 @@ function _initOrderListView(records){
         tmplData:records
     });
     $('.container').html(appTmpl.getHtml());
+    if(records.data.length!=0){
+        $('.my-aunt').show();
+        $('.other-aunt').show();
+    }else{
+        $('.title-loading').show();
+    }
+    if(!pageParams.providers){
+        $('.auntList-tips').hide();
+    }
 }
 
 function _bindEvents(){
@@ -45,7 +54,7 @@ function _bindEvents(){
         var userid=$(this).data('userid'),
             price=$(this).data('price'),
             commercialid=$(this).data('commercialid');
-        window.location.href='/wechat/auntDetail.html?userid='+userid+'&price='+price+'&orderno='+pageParams.orderno+'&commercialid='+commercialid;
+        window.location.href='auntDetail.html?userid='+userid+'&price='+price+'&orderno='+pageParams.orderno+'&commercialid='+commercialid;
     })
 }
 function getAuntLits(){

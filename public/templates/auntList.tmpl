@@ -40,7 +40,9 @@
 						<p>
 							<span class="aunt-name"><%=data[i].realname%></span>
 							<span class="aunt-level">
-								<i class="iconfont aunt-star">&#xe676;</i>
+								<%for(var j=0;j<data[i].startlevel;j++){%><!--不能用i循环了..-->
+									<i class="iconfont aunt-star">&#xe676;</i>
+								<%}%>
 							</span>
 						</p>
 						<p>
@@ -65,7 +67,9 @@
 						<p>
 							<span class="aunt-name"><%=data[i].realname%></span>
 							<span class="aunt-level">
-								<i class="iconfont aunt-star">&#xe676;</i>
+								<%for(var j=0;j<data[i].startlevel;j++){%><!--不能用i循环了..-->
+									<i class="iconfont aunt-star">&#xe676;</i>
+								<%}%>
 							</span>
 						</p>
 						<p>

@@ -100,14 +100,14 @@ function renderMyAunt(type){
     });
 }
 function bindAuntEvents(){
-	/**
+
 	$('ul').on('click','.aunt-item',function(){
 		$('.aunt-item').click(function(){
 			var userid=$(this).data('userid');
-			window.location.href='/wechat/auntDetail.html?userid='+userid;
+			window.location.href='auntDetail.html?userid='+userid;
 		})
 	})
-	**/
+
 	$('.myAunt-btn').click(function(){
 		pageParams.providers="";
 		pageParams.myAunt=[];

@@ -43,10 +43,12 @@ function renderMain(){
 	        loop:true,
 	        autoplayDisableOnInteraction: false
 	    });
+	    /**
 	    $("#tab-2").marquee({
 		    speed:3000, 
 		    rowHeight:20 
 		});
+		**/
 		var wxShare=new WxShare({
 			img:'/wechat/v4.0/public/images/share.jpg',
 			linkurl:'/wechat/v4.0/home.html',
