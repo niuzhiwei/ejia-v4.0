@@ -1,0 +1,49 @@
+<div class="row">
+	<div class='tabs-orders <%if(tabCurrent==0){%>order-tabs-current<%}%>' data-state='all'>
+		<figure>
+			<div class='tabs-num-box'>
+				<i class="iconfont">&#xe629;</i>
+			</div>
+			<figcaption>全部订单</figcaption>
+		</figure>
+	</div>
+	<div class='tabs-wait-pay <%if(tabCurrent==1){%>order-tabs-current<%}%>' data-state='waitpay'>
+		<figure>
+			<div class='tabs-num-box'>
+				<i class="iconfont">&#xe626;</i>
+				<%if(!!data.waitpay){%>
+					<div class="order-tabs-num wait-pay-num">
+						<%=data.waitpay%>
+					</div>
+				<%}%>
+			</div>
+			<figcaption>待付款</figcaption>
+		</figure>
+	</div>
+	<div class='tabs-wait-comment <%if(tabCurrent==2){%>order-tabs-current<%}%>' data-state='waitevaluate'>
+		<figure>
+			<div class='tabs-num-box'>
+				<i class="iconfont">&#xe627;</i>
+				<%if(!!data.waitevaluate){%>
+					<div class="order-tabs-num wait-comment-num">
+						<%=data.waitevaluate%>
+					</div>
+				<%}%>
+			</div>
+			<figcaption>待评价</figcaption>		
+		</figure>
+	</div>
+	<div class='tabs-wait-service <%if(tabCurrent==3){%>order-tabs-current<%}%>' data-state='waitservice'>
+		<figure>
+			<div class='tabs-num-box'>
+				<i class="iconfont">&#xe625;</i>
+				<%if(!!data.waitservice){%>
+					<div class="order-tabs-num wait-service-num">
+						<%=data.waitservice%>
+					</div>
+				<%}%>
+			</div>
+			<figcaption>待服务</figcaption>
+		</figure>
+	</div>
+</div>

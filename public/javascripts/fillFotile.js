@@ -39,9 +39,9 @@ var requireItem=[];
 function typeMap(type){
 	var map={
 		'fotile':[
-				{img:require('../images/cleaning/fotile/style-1.png'),name:'欧式油烟机',price:'160元/台',type:'0001000300020004',title:'欧式油烟机（160元/台）'},
-				{img:require('../images/cleaning/fotile/style-2.png'),name:'中式油烟机',price:'160元/台',type:'0001000300020003',title:'中式油烟机（160元/台）'},
-				{img:require('../images/cleaning/fotile/style-3.png'),name:'侧吸式油烟机',price:'160元/台',type:'0001000300020005',title:'侧吸式油烟机（160元/台）'}
+				{img:require('../images/cleaning/fotile/style-1.png'),name:'欧式油烟机',price:'160元/台',type:'00010003000400040002',title:'欧式油烟机（160元/台）'},
+				{img:require('../images/cleaning/fotile/style-2.png'),name:'中式油烟机',price:'160元/台',type:'00010003000400040001',title:'中式油烟机（160元/台）'},
+				{img:require('../images/cleaning/fotile/style-3.png'),name:'侧吸式油烟机',price:'160元/台',type:'00010003000400040003',title:'侧吸式油烟机（160元/台）'}
 		],
 		'air':[
 				{img:require('../images/cleaning/air/p1.jpg'),name:'挂式空调',price:'145元/台',type:'00010003000400030001',title:'挂式空调（145元/台）'},

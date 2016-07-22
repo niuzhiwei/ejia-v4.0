@@ -8,6 +8,6 @@ var appTmpl=new Template({
 });
 **/
 var template = require("jade!../../views/file.jade");//返回一个函数
-var html=template({'title':'love exiangjia'});
+var html=template({'title':'love exiangjia2'});
 console.log('jade='+html);
 $('body').html(html);
