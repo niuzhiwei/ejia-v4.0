@@ -534,6 +534,7 @@ var step3Tmpl=new Template({
     	pageParams.appointTime.data=fotileSeesion.agreedTime;
     	fotileSeesion.orderRemark=$('.order-remark').val();
     	fotileSeesion.typeList=pageParams.typeList;
+    	fotileSeesion.serviceclass=pageParams.serviceclass;
         sessionStorage.fotileSeesion=JSON.stringify(fotileSeesion);
         sessionStorage.fotileType=pageParams.type;
     }
@@ -545,6 +546,7 @@ var step3Tmpl=new Template({
     	}
     	if(!!sessionStorage.fotileSeesion){
     		var fotileSeesion=JSON.parse(sessionStorage.fotileSeesion);
+    		pageParams.serviceclass=fotileSeesion.serviceclass;
 	    	pageParams.currentStep=fotileSeesion.currentStep;
 	    	pageParams.appointTime.data=fotileSeesion.agreedTime;
 	    	pageParams.orderRemark=fotileSeesion.orderRemark;
