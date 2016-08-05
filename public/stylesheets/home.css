@@ -173,3 +173,8 @@ body {
     -webkit-transform-origin: 0 25%;
     -webkit-transform: scale(0.5, 0.5);
 }
+.newimg{
+	width:40px;
+	height:40px;
+	margin:0 auto;
+}

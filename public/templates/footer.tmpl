@@ -1,34 +1,55 @@
-<div class="menu table">
-	<div class="td home">
+<style>
+.footerdiv{
+	 position:relative;
+	 z-index: 1001; 
+	 height:50px;
+}
+.footerdiv_con{
+	position: absolute;
+	z-index: 1002;
+	top:-23px;
+	left:0px;
+	width:100%;
+}
+.detail{
+	width:25%;
+	float:left;
+}
+.mt-3{margin-top:-6px;}
+</style>
+<div class="menu table footerdiv">	
+<div class="footerdiv_con">
+	<div class="td home detail">
 		<a href='/wechat/v4.0/home.html'>
 			<figure class="menu-item <%if(current==1){%> menu-current<%}%>">
-		    	<i class="iconfont">&#xe665;</i>
-		    	<figcaption>首页</figcaption>
+		    	<img src='../images/home/home_yes.png' style='width:60px;height:60px;margin:0 auto;'/>
+		    	<figcaption class="mt-3">首页</figcaption>
 	  		</figure>
 		</a>
 	</div>
-	<div class="td order">
+	<div class="td order detail">
 		<a href='/wechat/order.html'>
 			<figure class="menu-item <%if(current==2){%> menu-current<%}%>">
-		    	<i class="iconfont">&#xe663;</i>
-		    	<figcaption>订单</figcaption>
+		    	<img src='../images/home/order_no.png' style='width:60px;height:60px;margin:0 auto;'/>
+		    	<figcaption class="mt-3">订单</figcaption>
 	  		</figure>
   		</a>
 	</div>
-	<div class="td vip">
-		<a href='/wechat/payActivity.html'>
+	<div class="td vip detail">
+		<a href='/wechat/payActivity_bg.html'>
 			<figure class="menu-item <%if(current==4){%> menu-current<%}%>">
-		    	<i class="iconfont">&#xe664;</i>
-		    	<figcaption>会员</figcaption>
+		    	<img src='../images/home/vip_no.png' style='width:60px;height:60px;margin:0 auto;'/>
+		    	<figcaption class="mt-3">会员</figcaption>
 	  		</figure>
   		</a>
 	</div>
-	<div class="td profile">
+	<div class="td profile detail">
 		<a href='/wechat/profile.html'>
 			<figure class="menu-item <%if(current==3){%> menu-current<%}%>">
-		    	<i class="iconfont">&#xe666;</i>
-		    	<figcaption>我的</figcaption>
+		    	<img src='../images/home/my_no.png' style='width:60px;height:60px;margin:0 auto;'/>
+		    	<figcaption class="mt-3">我的</figcaption>
 	  		</figure>
   		</a>
+	</div>	
 	</div>
 </div>

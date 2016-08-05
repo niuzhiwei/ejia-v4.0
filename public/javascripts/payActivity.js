@@ -36,10 +36,10 @@ function main(){
     });
     $('.container').html(pageTmpl.getHtml());
     var wxShare=new WxShare({
-        img:'/wechat/v4.0/public/images/share/payActivity.jpg',
+        img:'/wechat/v4.0/public/images/share/payActivity_tkl.jpg',
         linkurl:'/wechat/payActivity.html',
         desc:'e享家-互联网家庭生活服务品牌，内部爆料，数量有限！',
-        title:'全城疯狂抢购北国亲情卡'
+        title:'全城疯狂抢购365生活卡'
     })
     bindEvents();
 }
